@@ -1,4 +1,4 @@
-package Blatt02;
+package blatt02;
 
 import java.util.Scanner; //Import des Scanners
 

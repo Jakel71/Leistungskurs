@@ -1,4 +1,4 @@
-package Blatt01;
+package blatt01;
 
 public class HelloWorld {
     public static void main(String[] args) {

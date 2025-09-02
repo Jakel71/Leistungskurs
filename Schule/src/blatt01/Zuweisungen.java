@@ -1,4 +1,4 @@
-package Blatt01;
+package blatt01;
 
 public class Zuweisungen {
     public static void main(String[] args) {

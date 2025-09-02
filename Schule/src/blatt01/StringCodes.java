@@ -1,6 +1,4 @@
-package Blatt01;
-
-import java.sql.SQLOutput;
+package blatt01;
 
 public class StringCodes {
     public static void main(String[] args) {
