@@ -33,16 +33,19 @@ public class Haendler {
             System.out.println("Bestelllimit von 50 SD-Karten erreicht, wir setzten ihre Bestellmenge nun auf 50 herrab.");
         }
         double startPreis = an*normal+ ami*mini+amc*micro;
-        System.out.println("\nDer Preis für ...\n"
+
+        System.out.println("\nDer normale Preis für ...\n"
                 + an + " normale SD-Karten\n"
                 + ami + " MiniSD-Karten\n"
                 + amc + " MicroSD-Karten\n... lautet "
                 + startPreis + " €");
         // Mindestens 6 Variabeln benötigt
         //für Anzahl int und für Preis double
-        double rabattSatz = 0.85;
-        double rabatt = startPreis * rabattSatz;
-        System.out.printf(" \nRabatt : %.2f € \n", rabatt);
-        System.out.printf("Gesamt Preis : %.2f €", (startPreis-rabatt));
+        if (an+ami+amc >=15) { // Rabatt ab dem 15. Artikel, falls 15 nicht inklusive ist, einfach "="-Zeichen löschen oder 15 um eins erhöhen
+            double rabattSatz = 0.85;
+            double rabatt = startPreis * rabattSatz;
+            System.out.printf(" \nRabatt : %.2f € \n", rabatt);
+            System.out.printf("Gesamt Preis nach Rabattierung: %.2f €", (startPreis - rabatt));
+        }
     }
 }
