@@ -3,7 +3,7 @@ package blatt04;
 import java.util.Random;
 import java.util.Scanner;
 
-public class schlagDieKuh {
+public class SchlagDieKuh {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         Random rnd = new Random();
