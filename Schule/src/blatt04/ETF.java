@@ -23,7 +23,7 @@ public class ETF {
             System.out.println("Gesamter Sparbetrag:\t\t\t" + totalSparBetrag);
             System.out.println("Gesamter Anteil an der Aktie:\t" + anteil);
         }
-        gewinn += (anteil*wert)*wertsteigerung/100;
+        gewinn += (anteil*wert)*wertsteigerung/100*i/12;
         System.out.printf("Gewinn:\t\t\t\t\t\t\t%.2f€",gewinn);
 
     }
