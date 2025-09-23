@@ -2,7 +2,7 @@ package blatt06;
 
 import java.util.Scanner;
 
-public class NotenArry {
+public class NotenArrys {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.print("Wie viele Schüler gibt es in Ihrer Klasse? ");
