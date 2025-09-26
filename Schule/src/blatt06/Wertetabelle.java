@@ -7,12 +7,12 @@ public class Wertetabelle {
         Scanner input = new Scanner(System.in);
         System.out.println("Wie hoch ist Ihr Exponent?");
         int grad = input.nextInt();
-        double[] coeff = new double[grad+1];
+        double[] koeff = new double[grad+1];
         double ergebnis = 0;
         double x;
         for (int i = 0; i <= grad; i++) {
             System.out.println("Was ist Ihr Koeffizient für x^" + i + " ?");
-            coeff[i] = input.nextDouble();
+            koeff[i] = input.nextDouble();
         }
         System.out.println("Was ist Ihr Wertebereich?\nWas ist der kleinere Wert?");
         double klein = input.nextDouble();
@@ -24,7 +24,7 @@ public class Wertetabelle {
             x = j;
             ergebnis = 0;
             for (int i = 0; i <= grad; i++) {
-                ergebnis += coeff[i] * Math.pow(x, i);
+                ergebnis += koeff[i] * Math.pow(x, i);
             }
             System.out.printf("\nDas Ergebnis für x = %.2f ist: %.2f", x, ergebnis);
         }
