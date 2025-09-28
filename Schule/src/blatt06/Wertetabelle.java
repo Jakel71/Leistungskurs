@@ -18,7 +18,7 @@ public class Wertetabelle {
         double klein = input.nextDouble();
         System.out.println("Was ist ihr größerer Wert?");
         double gross = input.nextDouble(); // groß geht nicht, da ß als falsch bzw. nicht ASCII angezeigt wird
-        System.out.println("Mit welchen Schritten möchten sie Vorgehen?");
+        System.out.println("Mit welchen Schritten möchten Sie Vorgehen?");
         double schritte = input.nextDouble();
         for (double j = klein; j <= gross; j+=schritte) {
             x = j;

@@ -6,7 +6,7 @@ public class GrenzenSetzen {
 
         public static void main(String[] args) {
             Scanner input = new Scanner(System.in);
-            System.out.println("Bitte geben sie nur natürliche Zahlen (alle Zahlen >= 0; und ohne Komma) ein.");
+            System.out.println("Bitte geben Sie nur natürliche Zahlen (alle Zahlen >= 0; und ohne Komma) ein.");
             System.out.println("Was ist Ihr Startwert, unterer Wert?");
             int u = input.nextInt();
             System.out.println("Was ist Ihr Endwertwert, oberer Wert?");
