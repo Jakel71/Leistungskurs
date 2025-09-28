@@ -16,17 +16,17 @@ public class DoubleFibonacci {
         }else { // Ab 1477 kommt infinity raus, deswegen limitiere ich das ganze mal darauf. Es wird nur noch das erste infinity ausgegeben.
             arr[0] = 0;
             arr[1] = 1;
-            System.out.println("Der Wert für Fibonacci an Stelle 0 ist: " + arr[0]);
-            System.out.println("Der Wert für Fibonacci an Stelle 1 ist: " + arr[1]);
+            System.out.printf("Der Wert für Fibonacci an Stelle 0 ist: %.2f", arr[0]);
+            System.out.printf("Der Wert für Fibonacci an Stelle 1 ist: %.2f", arr[1]);
             for (int i = 2; i <= n; i++) {
                 arr[i] = arr[i - 2] + arr[i - 1];
-                System.out.println("Der Wert für Fibonacci an Stelle " + i + " ist: " + arr[i]);
+                System.out.printf("Der Wert für Fibonacci an Stelle " + i + " ist: %.2f\n", arr[i]);
             }
             if (n == 1477) {
                 double quotient = arr[n - 1] / arr[n - 2];
-                System.out.println("Der Quotient der vorletzten beiden Fibonacci Zahlen ist: " + quotient);
+                System.out.printf("Der Quotient der vorletzten beiden Fibonacci Zahlen ist: %.2f\n", quotient);
                 double quotient2 = arr[n] / arr[n - 1];
-                System.out.println("Der Quotient der letzten beiden Fibonacci Zahlen ist: " + quotient2);
+                System.out.printf("Der Quotient der letzten beiden Fibonacci Zahlen ist: %.2f", quotient2);
             } else {
                 double quotient = arr[n] / arr[n - 1];
                 System.out.printf("Der Quotient der letzten beiden Fibonacci Zahlen ist: %.2f", quotient);
