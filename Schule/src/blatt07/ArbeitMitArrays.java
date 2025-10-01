@@ -145,8 +145,5 @@ public class ArbeitMitArrays {
         return arr;
     }
 
-    public static void main(String[] args) {
-        printArray(shiftRight(new double[]{1,2,3,4,5,6,7,8,9,10}));
-    }
 
 }
