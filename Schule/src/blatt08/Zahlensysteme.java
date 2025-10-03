@@ -88,7 +88,4 @@ public class Zahlensysteme {
             return Integer.parseInt(eingabe);
         }
     }
-    public static void main(String[] args) {
-        System.out.println(zuDezimal("(B12951)16"));
-    }
 }
