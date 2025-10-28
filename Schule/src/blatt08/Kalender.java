@@ -67,14 +67,14 @@ public class Kalender {
         int tag = getTag(eingabe) + 1;
         int monat = getMonat(eingabe);
         int jahr = getJahr(eingabe);
-        int [] anzahltage = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
+        int [] anzahlTage = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
         boolean istSchaltjahr = istSchaltjahr(jahr);
         if (istSchaltjahr && monat == 2 && tag > 29 ) {
             tag -= 29;
             monat += 1;
             System.out.println("Schaltjahr + Tages überschreitung im Februar");
-        } else if (tag > anzahltage[monat-1]) {
-            tag -= anzahltage[monat-1];
+        } else if (tag > anzahlTage[monat-1]) {
+            tag -= anzahlTage[monat-1];
             monat += 1;
         }
         if (monat > 12) {
