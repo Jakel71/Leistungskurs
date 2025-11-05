@@ -11,10 +11,9 @@ public class Teiler {
         if (teiler != 0){
             if (zahl%teiler == 0) {
                 return true;
-            } else {
-                return false;
             }
         }
+        return false;
     }
 
     /**
