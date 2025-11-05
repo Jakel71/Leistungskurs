@@ -8,10 +8,12 @@ public class Teiler {
      * @return boolischer Wert, möglich oder nicht möglich, also true wenn kein Rest entsteht
      */
     public static boolean istTeiler (int zahl, int teiler){
-        if (zahl%teiler == 0) {
-            return true;
-        } else {
-            return false;
+        if (teiler != 0){
+            if (zahl%teiler == 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -82,5 +84,7 @@ public class Teiler {
         return teilerArrayNull;
     }
 
-
+    public static void main(String[] args) {
+        System.out.println(istTeiler(1,0));
+    }
 }
