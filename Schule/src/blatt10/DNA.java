@@ -164,7 +164,7 @@ public class DNA {
     }
 
     /**
-     * UMwandlung eines DNA-Stranges aus einem String in ein Byte-Array, wobei jedes Element 4 DNA-Moleküle speichert.
+     * Umwandlung eines DNA-Stranges aus einem String in ein Byte-Array, wobei jedes Element 4 DNA-Moleküle speichert.
      * @param s String (Datenverlust, wenn nicht (s.length %4 == 0))
      * @return byte-Array
      */
@@ -190,6 +190,11 @@ public class DNA {
         return dna;
     }
 
+    /**
+     * Umwandlung eines DNA-Stranges aus einem Byte-Array, wobei jedes Element 4 DNA-Moleküle speichert, in einen String.
+     * @param dna boolean-Array
+     * @return String
+     */
     public static String zuDNA_effizient (byte[] dna){
         boolean[] dna_bool= new boolean[dna.length*8];
         for (int i = 1; i <= dna.length; i++) {
