@@ -83,7 +83,7 @@ public class Teiler {
         return teilerArrayNull;
     }
 
-    public static void main(String[] args) {
-        System.out.println(istTeiler(1,0));
-    }
+    //public static void main(String[] args) {
+    //    System.out.println(istTeiler(1,0));
+    //}
 }

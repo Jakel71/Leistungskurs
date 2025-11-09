@@ -1,6 +1,5 @@
 package blatt09;
 
-import blatt07.ArbeitMitArrays;
 
 public class Primzahlen {
     /**
@@ -59,7 +58,7 @@ public class Primzahlen {
     }
 
     /**
-     * Ausgeben aller Primzahlen, welche zusammen summiert den Input ergeben
+     * Ausgeben aller Primzahlen, welche zusammen multipliziert den Input ergeben
      * @param zahl int Zahl (input)
      */
     public static void primfaktorzerlegung(int zahl){
