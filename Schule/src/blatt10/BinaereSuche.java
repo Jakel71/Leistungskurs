@@ -2,6 +2,12 @@ package blatt10;
 
 public class BinaereSuche {
 
+    /**
+     * Binäre Suche von n im Array arr
+     * @param arr int-Array
+     * @param n int
+     * @return true/false
+     */
 	public static boolean binaerSuchen(int[] arr, int n) {
         int abfragen = 0;
         int operationen = 0;
