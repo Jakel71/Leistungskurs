@@ -133,7 +133,10 @@ public class PenAndPaper {
         return 'u';
     }
 
-    public static void main(String[] args){
+    /**
+     * Methode, welche die Gewinnauswertung der 100 Kämpfe vornimmt
+     */
+    public static void gewinnauswertungAlt(){
         int a = 0;
         int b = 0;
         int u = 0;
@@ -150,5 +153,36 @@ public class PenAndPaper {
         System.out.println("Spieler A hat " + a + " kämpfe gewonnen!");
         System.out.println("Spieler B hat " + b + " kämpfe gewonnen!");
         System.out.println("Unentschieden: " + u);
+    }
+
+    /**
+     * Gewinnauswertung wie oben, aber mit veränderten stats im Kampf zu gunsten des Barden
+     * 1. Ruestungsklasse von 10 zu 16 --> großer Impcat
+     * 2. Angriffsbonus von 2 zu 8 --> noch besser
+     */
+
+    public static void gewinnauswertungNeu (){
+        int a = 0;
+        int b = 0;
+        int u = 0;
+        for (int i=0; i<100; i++){
+            char temp = kampf(70,1,8,1,14,0,3,1,10,42,1,6,8,16,3,0,0,0);
+            if (temp == 'A'){
+                a++;
+            } else if (temp == 'B'){
+                b++;
+            } else {
+                u++;
+            }
+        }
+        System.out.println("Spieler A hat " + a + " kämpfe gewonnen!");
+        System.out.println("Spieler B hat " + b + " kämpfe gewonnen!");
+        System.out.println("Unentschieden: " + u);
+    }
+
+    public static void main(String[] args) {
+        gewinnauswertungAlt();
+
+        gewinnauswertungNeu();
     }
 }
