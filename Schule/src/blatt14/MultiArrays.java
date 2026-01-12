@@ -161,23 +161,21 @@ public class MultiArrays {
      * @param b Anzahl der Verschiebungen
      * @return arr, geshifted
      */
-    //TODO: Bug finden
     public static int[][] shiftRows(int[][] arr,int a,int b){
         for(int j=0; j<b; j++) {
             int zwischenwert = arr[a][0];
-            for (int i = 1; i < arr.length; i++) {
+            for (int i = 1; i < arr[a].length; i++) {
                 arr[a][i - 1] = arr[a][i];
             }
-            arr[a][arr.length - 1] = zwischenwert;
+            arr[a][arr[a].length - 1] = zwischenwert;
         }
         return arr;
     }
 
     public static void main(String[] args) {
-        int[][] arr = createRandom2DIntArray(3,5,1,10);
-        int[][] arr2 = arr;
-        arr2 = shiftRows(arr,1,2);
+        int[][] arr = createRandom2DIntArray(5,10,1,10);
         print2DArray(arr);
+        int[][] arr2 = shiftRows(arr,2,5);
         print2DArray(arr2);
     }
 
