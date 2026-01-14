@@ -63,12 +63,14 @@ public class Simulationen {
      * @return
      */
     public static char getNorden(char[][] arr, int[] position){
-        if (position[1] == 0) {
-            position[1] = arr[0].length-1;
+        int x = position[0];
+        int y = position[1];
+        if (y == 0) {
+            y = arr[0].length-1;
         } else{
-            position[1]--;
+            y--;
         }
-        return arr[position[0]][position[1]];
+        return arr[x][y];
     }
 
     /**
@@ -78,12 +80,15 @@ public class Simulationen {
      * @return
      */
     public static char getSueden(char[][] arr, int[] position){
-        if (position[1] == arr[0].length-1) {
-            position[1] = 0;
+        int x = position[0];
+        int y = position[1];
+
+        if (y == arr[0].length-1) {
+            y = 0;
         } else{
-            position[1]++;
+            y++;
         }
-        return arr[position[0]][position[1]];
+        return arr[x][y];
     }
 
 
@@ -94,12 +99,14 @@ public class Simulationen {
      * @return
      */
     public static char getWesten(char[][] arr, int[] position){
-        if (position[0] == 0) {
-            position[0] = arr.length-1;
+        int x = position[0];
+        int y = position[1];
+        if (x == 0) {
+            x = arr.length-1;
         } else{
-            position[0]--;
+            x--;
         }
-        return arr[position[0]][position[1]];
+        return arr[x][y];
     }
 
 
@@ -110,12 +117,14 @@ public class Simulationen {
      * @return
      */
     public static char getOsten(char[][] arr, int[] position){
-        if (position[0] == arr.length-1) {
-            position[0] = 0;
+        int x = position[0];
+        int y = position[1];
+        if (x == arr.length-1) {
+            x = 0;
         } else{
-            position[0]++;
+            x++;
         }
-        return arr[position[0]][position[1]];
+        return arr[x][y];
     }
 
 
@@ -126,19 +135,21 @@ public class Simulationen {
      * @return
      */
     public static char getNordWest(char[][] arr, int[] position){
-        if (position[1] == 0) {
-            position[1] = arr[0].length-1;
+        int x = position[0];
+        int y = position[1];
+        if (y == 0) {
+            y = arr[0].length-1;
         } else{
-            position[1]--;
+            y--;
         }
 
-        if (position[0] == 0) {
-            position[0] = arr.length-1;
+        if (x == 0) {
+            x = arr.length-1;
         } else{
-            position[0]--;
+            x--;
         }
 
-        return arr[position[0]][position[1]];
+        return arr[x][y];
     }
 
     /**
@@ -148,19 +159,22 @@ public class Simulationen {
      * @return
      */
     public static char getNordOst(char[][] arr, int[] position){
-        if (position[1] == 0) {
-            position[1] = arr[0].length-1;
+        int x = position[0];
+        int y = position[1];
+
+        if (y == 0) {
+            y = arr[0].length-1;
         } else{
-            position[1]--;
+            y--;
         }
 
-        if (position[0] == arr.length-1) {
-            position[0] = 0;
+        if (x == arr.length-1) {
+            x = 0;
         } else{
-            position[0]++;
+            x++;
         }
 
-        return arr[position[0]][position[1]];
+        return arr[x][y];
     }
 
 
@@ -171,38 +185,43 @@ public class Simulationen {
      * @return
      */
     public static char getSuedWest(char[][] arr, int[] position){
-        if (position[1] == arr[0].length-1) {
-            position[1] = 0;
+        int x = position[0];
+        int y = position[1];
+        if (y == arr[0].length-1) {
+            y = 0;
         } else{
-            position[1]++;
+            y++;
         }
-        if (position[0] == 0) {
-            position[0] = arr.length-1;
+        if (x == 0) {
+            x = arr.length-1;
         } else{
-            position[0]--;
+            x--;
         }
-        return arr[position[0]][position[1]];
+        return arr[x][y];
     }
 
     /**
      * Returned das Feld Süd-Östlich
      * @param arr 2D-Char Array
      * @param position Position(x|y) in [x,y]
-     * @return
+     * @return Zeichen
      */
     public static char getSuedOst(char[][] arr, int[] position){
-        if (position[1] == arr[0].length-1) {
-            position[1] = 0;
+        int x = position[0];
+        int y = position[1];
+
+        if (y == arr[0].length-1) {
+            y = 0;
         } else{
-            position[1]++;
+            y++;
         }
 
-        if (position[0] == arr.length-1) {
-            position[0] = 0;
+        if (x == arr.length-1) {
+            x = 0;
         } else{
-            position[0]++;
+            x++;
         }
-        return arr[position[0]][position[1]];
+        return arr[x][y];
     }
 
     /**
