@@ -1,9 +1,9 @@
 package blatt14;
 
-
+import schisch_visualizer.*;
 
 public class Simulationen {
-
+    static char[][] spielfeld;
 
     /**
      * Füllt ein 2D-char Array mit einem Zeichen
@@ -64,14 +64,256 @@ public class Simulationen {
      */
     public static char getNorden(char[][] arr, int[] position){
         if (position[1] == 0) {
-            position[1] = arr[0].length;
+            position[1] = arr[0].length-1;
         } else{
             position[1]--;
         }
         return arr[position[0]][position[1]];
     }
 
-    public static void main(String args[]){
+    /**
+     * Returned das Feld Südlich
+     * @param arr 2D-Char Array
+     * @param position Position(x|y) in [x,y]
+     * @return
+     */
+    public static char getSueden(char[][] arr, int[] position){
+        if (position[1] == arr[0].length-1) {
+            position[1] = 0;
+        } else{
+            position[1]++;
+        }
+        return arr[position[0]][position[1]];
+    }
 
+
+    /**
+     * Returned das Feld Westlich
+     * @param arr 2D-Char Array
+     * @param position Position(x|y) in [x,y]
+     * @return
+     */
+    public static char getWesten(char[][] arr, int[] position){
+        if (position[0] == 0) {
+            position[0] = arr.length-1;
+        } else{
+            position[0]--;
+        }
+        return arr[position[0]][position[1]];
+    }
+
+
+    /**
+     * Returned das Feld Östlich
+     * @param arr 2D-Char Array
+     * @param position Position(x|y) in [x,y]
+     * @return
+     */
+    public static char getOsten(char[][] arr, int[] position){
+        if (position[0] == arr.length-1) {
+            position[0] = 0;
+        } else{
+            position[0]++;
+        }
+        return arr[position[0]][position[1]];
+    }
+
+
+    /**
+     * Returned das Feld Nörd-Westlich
+     * @param arr 2D-Char Array
+     * @param position Position(x|y) in [x,y]
+     * @return
+     */
+    public static char getNordWest(char[][] arr, int[] position){
+        if (position[1] == 0) {
+            position[1] = arr[0].length-1;
+        } else{
+            position[1]--;
+        }
+
+        if (position[0] == 0) {
+            position[0] = arr.length-1;
+        } else{
+            position[0]--;
+        }
+
+        return arr[position[0]][position[1]];
+    }
+
+    /**
+     * Returned das Feld Nörd-Östlich
+     * @param arr 2D-Char Array
+     * @param position Position(x|y) in [x,y]
+     * @return
+     */
+    public static char getNordOst(char[][] arr, int[] position){
+        if (position[1] == 0) {
+            position[1] = arr[0].length-1;
+        } else{
+            position[1]--;
+        }
+
+        if (position[0] == arr.length-1) {
+            position[0] = 0;
+        } else{
+            position[0]++;
+        }
+
+        return arr[position[0]][position[1]];
+    }
+
+
+    /**
+     * Returned das Feld Süd-Westlich
+     * @param arr 2D-Char Array
+     * @param position Position(x|y) in [x,y]
+     * @return
+     */
+    public static char getSuedWest(char[][] arr, int[] position){
+        if (position[1] == arr[0].length-1) {
+            position[1] = 0;
+        } else{
+            position[1]++;
+        }
+        if (position[0] == 0) {
+            position[0] = arr.length-1;
+        } else{
+            position[0]--;
+        }
+        return arr[position[0]][position[1]];
+    }
+
+    /**
+     * Returned das Feld Süd-Östlich
+     * @param arr 2D-Char Array
+     * @param position Position(x|y) in [x,y]
+     * @return
+     */
+    public static char getSuedOst(char[][] arr, int[] position){
+        if (position[1] == arr[0].length-1) {
+            position[1] = 0;
+        } else{
+            position[1]++;
+        }
+
+        if (position[0] == arr.length-1) {
+            position[0] = 0;
+        } else{
+            position[0]++;
+        }
+        return arr[position[0]][position[1]];
+    }
+
+    /**
+     * Zählt die Anzahl an Elementen(zeichen) im direkt benachbarten Bereich(nord/süd/ost/west)
+     * @param arr Feld(2D-char)
+     * @param position Position, um welche geschaut wird
+     * @param zeichen zu findendes Zeichen
+     * @param rand Ob am Ende des Feldes am anderen Ende geschaut werden soll
+     * @return Anzahl des Zeichens im Umfeld
+     */
+    public static int zaehlenVier(char[][] arr, int[] position, char zeichen, boolean rand){
+        int i = 0;
+
+        if(getNorden(arr, position)==zeichen){
+            if(!rand || position[1]!=0) {
+                i++;
+            }
+        }
+        if(getSueden(arr, position)==zeichen){
+            if(!rand || position[1]!=arr[0].length-1) {
+                i++;
+            }
+        }
+        if(getWesten(arr, position)==zeichen){
+            if(!rand || position[0]!=0) {
+                i++;
+            }
+
+        }
+        if(getOsten(arr, position)==zeichen){
+            if(!rand || position[0]!=arr.length-1) {
+                i++;
+            }
+
+        }
+        return i;
+    }
+
+    /**
+     * Zählt die Anzahl an Elementen(zeichen) im benachbarten Bereich(nord/süd/ost/west/nordwest/nordost/südwest/südost)
+     * @param arr Feld(2D-char)
+     * @param position Position, um welche geschaut wird
+     * @param zeichen zu findendes Zeichen
+     * @param rand Ob am Ende des Feldes am anderen Ende geschaut werden soll
+     * @return Anzahl des Zeichens im Umfeld
+     */
+    public static int zaehlenAcht(char[][] arr, int[] position, char zeichen, boolean rand){
+        int i = 0;
+
+        if(getNorden(arr, position)==zeichen){
+            if(!rand || position[1]!=0) {
+                i++;
+            }
+        }
+        if(getSueden(arr, position)==zeichen){
+            if(!rand || position[1]!=arr[0].length-1) {
+                i++;
+            }
+        }
+        if(getWesten(arr, position)==zeichen){
+            if(!rand || position[0]!=0) {
+                i++;
+            }
+
+        }
+        if(getOsten(arr, position)==zeichen){
+            if(!rand || position[0]!=arr.length-1) {
+                i++;
+            }
+
+        }
+
+
+        if(getNordWest(arr, position)==zeichen){
+            if(!rand || (position[1]!=0 && position[0]!=0)) {
+                i++;
+            }
+        }
+        if(getNordOst(arr, position)==zeichen){
+            if(!rand || (position[1]!=0 && position[0]!=arr.length-1)) {
+                i++;
+            }
+        }
+        if(getSuedWest(arr, position)==zeichen){
+            if(!rand || (position[1]!=arr[0].length-1 && position[0]!=0)) {
+                i++;
+            }
+        }
+        if(getSuedOst(arr, position)==zeichen){
+            if(!rand || (position[1]!=arr[0].length-1 && position[0]!=arr.length-1)) {
+                i++;
+            }
+        }
+        return i;
+    }
+
+    public static void main(String args[]){
+        SchischVisualizer sv = new SchischVisualizer();
+        spielfeld = MultiArrays.createEmpty2DCharArray(10,10);
+        sv.step(spielfeld);
+        double wahrscheinlichkeit = 0.9;
+        for (int i = 0; i < spielfeld.length; i++) {
+            for (int j = 0; j < spielfeld[i].length; j++) {
+                double zufallZahl = Math.random();
+                if (zufallZahl <= wahrscheinlichkeit) {
+                    spielfeld[i][j] = '2';
+                }
+            }
+        }
+        sv.step(spielfeld);
+        System.out.println(zaehlenAcht(spielfeld, new int[] {3,9},'2',true));
+        sv.start();
     }
 }
