@@ -154,7 +154,6 @@ public class OasenSuche {
                     }
                     bewegeSpielerZufaellig();
                     sv.step(spielfeld);
-                    System.out.println(energie);
                 }
             }
         }
@@ -170,7 +169,6 @@ public class OasenSuche {
         steinZufall(0.15);
         sv.step(spielfeld);
         findeWasser(50);
-        sv.step(spielfeld);
         sv.start();
     }
 }
