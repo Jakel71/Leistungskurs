@@ -658,7 +658,7 @@ public class Steine {
 
             for (int j = 0; j < spielfeld.length; j++) {
                 if(spielfeld[j][0]!='0'){
-                    System.out.println("Ende!!! Es wurden " + (clearRowCount-40) + " Reihen gelöscht.");
+                    System.out.println("Ende!!! Es wurden " + (clearRowCount) + " Reihen gelöscht.");
                     return;
                 }
             }
