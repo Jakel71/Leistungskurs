@@ -44,7 +44,9 @@ public class Kaese {
             }
         }
         sv.step(kaeseQuerschnitt);
-        for (int h = 0; h < kaeseQuerschnitt.length; h++) {
+        char[][] altKaeseQuerschnitt = MultiArrays.copy2DCharArray(kaeseQuerschnitt);
+        do{
+            altKaeseQuerschnitt = MultiArrays.copy2DCharArray(kaeseQuerschnitt);
             for (int i = 0; i <= kaeseQuerschnitt.length - 1; i++) {
                 for (int j = 0; j <= kaeseQuerschnitt[i].length - 1; j++) {
                     if (kaeseQuerschnitt[i][j] == '6') {
@@ -79,7 +81,8 @@ public class Kaese {
                     return;
                 }
             }
-        }
+        }while (!MultiArrays.istIdentisch(altKaeseQuerschnitt, kaeseQuerschnitt));
+
         System.out.println("Kaese ist Wasserdicht!");
     }
 
