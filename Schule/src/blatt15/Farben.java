@@ -157,9 +157,14 @@ public class Farben {
             reihenfolge[pos] = i;
         }
     }
+
     //TODO: Richtige Strategie machen
     public static void zug1 (int spielernum){
-        spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = '7';
+        if(spielernum>3){
+            spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]]='9';
+        } else {
+            spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = '7';
+        }
 
         int richtung = (int)(Math.random()*4);
 
@@ -186,11 +191,14 @@ public class Farben {
         }
         spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = 'P';
     }
-    //TODO: Richtige Strategie machen
+
     public static void zug2 (int spielernum){
         zug1(spielernum);
-        }
+    }
 
+    /**
+     * ausführen einer Spielrunde
+     */
     public static void schritt(){
         reihenfolge();
         for(int i=0; i<reihenfolge.length; i++){
@@ -200,18 +208,50 @@ public class Farben {
                 zug1(reihenfolge[i]);
             }
         }
+        for(int i=0; i<spielerPosX.length; i++){
+            if(spielerPosX[i]==-1 && spielerPosY[i]==-1){
+                respawn(i);
+            }
+        }
+    }
+
+    /**
+     * nimmt die Auswertung nach dem Spiel vor.
+     * Ausgabe der %-Zahlen der Teams
+     * @return 1 = Team 1 hat gewonnen;
+     *         2 = Team 2 hat gewonnen;
+     *         0 = beide Teams haben gleich viele Felder Eingefärbt
+     */
+    public static int auswertung(){
+        double team1Prozent = (double) zaehlen(1, true) /(spielfeld.length*spielfeld[0].length);
+        double team2Prozent = (double) zaehlen(2, true) /(spielfeld.length*spielfeld[0].length);
+        System.out.printf("Das Team 1 hat %.2f aller Felder gefärbt.\n",  team1Prozent);
+        System.out.printf("Das Team 2 hat %.2f aller Felder gefärbt.\n",  team2Prozent);
+        if(team1Prozent>team2Prozent){
+            return 1;
+        } else if(team1Prozent<team2Prozent){
+            return 2;
+        } else{
+            return 0;
+        }
+    }
+
+    public static void simulation(int anzahlDerSchritte){
+        //Vorbereitung:
+        initialisiereSpielfeld(80,80);
+        startPositionen();
         sv.step(spielfeld);
+        //Spiel:
+        for (int i = 0; i < anzahlDerSchritte; i++) {
+            schritt();
+            sv.step(spielfeld);
+        }
+        //Nachbereitung:
+        System.out.println(auswertung());
+        sv.start();
     }
 
     public static void main (String [] args){
-        initialisiereSpielfeld(80,80);
-        sv.step(spielfeld);
-        startPositionen();
-        sv.step(spielfeld);
-        for (int i = 0; i < 100; i++) {
-            schritt();
-        }
-
-        sv.start();
+    simulation(1000);
     }
 }
