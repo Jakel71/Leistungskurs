@@ -1,5 +1,6 @@
 package blatt15;
 
+import blatt07.ArbeitMitArrays;
 import blatt14.MultiArrays;
 import schisch_visualizer.*;
 
@@ -121,7 +122,7 @@ public class Farben {
             do {
                 spielerPosX[spielernum] = (int) (Math.random() * spielfeld.length);
                 spielerPosY[spielernum] = (int) (Math.random() * spielfeld[0].length);
-            } while(spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]]!='0');
+            } while(spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]]=='P' || spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]]=='8');
             spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = 'P';
         } else{
             int random = (int)(Math.random()*spielfeld.length*spielfeld[0].length);
@@ -139,15 +140,67 @@ public class Farben {
             spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = checkFarbe;
         }
     }
-    //TODO fix
-    public static String reihenfolge(){
-        do{
-            int[] reihenfolge = new int [8];
-            for(int i=8; i>0; i--){
-                reihenfolge[i] = (int)(Math.random()*i);
+
+
+    /**
+     * erzeugt eine Reihenfolge für alle Spieler
+     */
+    public static void reihenfolge(){
+        for(int i=0; i<reihenfolge.length; i++){
+            reihenfolge[i] = -1;
+        }
+        for(int i=0; i<reihenfolge.length; i++){
+            int pos;
+            do{
+                pos = (int)(Math.random()*8);
+            } while (reihenfolge[pos] !=-1);
+            reihenfolge[pos] = i;
+        }
+    }
+    //TODO: Richtige Strategie machen
+    public static void zug1 (int spielernum){
+        spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = '7';
+
+        int richtung = (int)(Math.random()*4);
+
+        if(richtung==0){ // Schritt nach rechts
+            if(spielerPosX[spielernum]!=spielfeld.length-2){
+                    spielerPosX[spielernum]++;
             }
-        }while(reihenfolge[0]==reihenfolge[1]);
-        return String.valueOf(reihenfolge[0]);
+
+        } else if(richtung==1){ // Schritt nach links
+            if(spielerPosX[spielernum]>1){
+                spielerPosX[spielernum]--;
+            }
+
+        } else if(richtung==2){ // Schritt nach oben
+            if(spielerPosY[spielernum]>1){
+                spielerPosY[spielernum]--;
+            }
+
+        } else if(richtung==3){ // Schritt nach unten
+            if(spielerPosY[spielernum]!=spielfeld[0].length-2){
+                spielerPosY[spielernum]++;
+            }
+
+        }
+        spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = 'P';
+    }
+    //TODO: Richtige Strategie machen
+    public static void zug2 (int spielernum){
+        zug1(spielernum);
+        }
+
+    public static void schritt(){
+        reihenfolge();
+        for(int i=0; i<reihenfolge.length; i++){
+            if(reihenfolge[i]>3){
+                zug2(reihenfolge[i]);
+            } else{
+                zug1(reihenfolge[i]);
+            }
+        }
+        sv.step(spielfeld);
     }
 
     public static void main (String [] args){
@@ -155,6 +208,10 @@ public class Farben {
         sv.step(spielfeld);
         startPositionen();
         sv.step(spielfeld);
+        for (int i = 0; i < 100; i++) {
+            schritt();
+        }
+
         sv.start();
     }
 }

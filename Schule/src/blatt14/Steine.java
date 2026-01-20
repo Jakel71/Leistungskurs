@@ -654,14 +654,13 @@ public class Steine {
             for (int j = 0; j < 39; j++) {
                 move();
             }
-            clearRow();
-
             for (int j = 0; j < spielfeld.length; j++) {
                 if(spielfeld[j][0]!='0'){
                     System.out.println("Ende!!! Es wurden " + (clearRowCount) + " Reihen gelöscht.");
                     return;
                 }
             }
+            clearRow();
         }
     }
 
