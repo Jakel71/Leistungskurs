@@ -83,7 +83,7 @@ public class Simulationen {
         int x = position[0];
         int y = position[1];
 
-        if (y == arr[0].length-1) {
+        if (y >= arr[0].length-1) {
             y = 0;
         } else{
             y++;

@@ -204,30 +204,38 @@ public class Farben {
                 // Random Schritte: (Manipulliert um eher nach rechts zu gehen)
 
                 if (richtung == 0 || richtung == 4 || richtung == 5) { // Schritt nach rechts
-                    if (spielerPosX[spielernum] <= spielfeld.length - 2) {
+                    if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 1) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 2) { // Schritt nach oben
                     if (spielerPosY[spielernum] > 1) {
                         spielerPosY[spielernum]--;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 3) { // Schritt nach unten
-                    if (spielerPosY[spielernum] <= spielfeld[0].length - 2) {
+                    if (spielerPosY[spielernum] < spielfeld[0].length - 2) {
                         spielerPosY[spielernum]++;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
                 }
             } else { //Vertiedigung?!
                 // Random Schritte: (manipuliert um eher nach oben/unten zu gehen)
 
                 if (richtung == 0) { // Schritt nach rechts
-                    if (spielerPosX[spielernum] <= spielfeld.length - 2) {
+                    if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
                     } else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
                         bewegeSpieler(spielernum, teamPos);
@@ -236,16 +244,22 @@ public class Farben {
                 } else if (richtung == 1) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 2 || richtung == 4) { // Schritt nach oben
                     if (spielerPosY[spielernum] > 1) {
                         spielerPosY[spielernum]--;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 3 || richtung == 5) { // Schritt nach unten
-                    if (spielerPosY[spielernum] <= spielfeld[0].length - 2) {
+                    if (spielerPosY[spielernum] < spielfeld[0].length - 2) {
                         spielerPosY[spielernum]++;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 }
@@ -255,23 +269,31 @@ public class Farben {
                 // Random Schritte: (Manipulliert um eher nach links zu gehen)
 
                 if (richtung == 0) { // Schritt nach rechts
-                    if (spielerPosX[spielernum] != spielfeld.length - 2) {
+                    if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 1 || richtung == 4 || richtung == 5) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 2) { // Schritt nach oben
                     if (spielerPosY[spielernum] > 1) {
                         spielerPosY[spielernum]--;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 3) { // Schritt nach unten
-                    if (spielerPosY[spielernum] != spielfeld[0].length - 2) {
+                    if (spielerPosY[spielernum] < spielfeld[0].length - 2) {
                         spielerPosY[spielernum]++;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
                 }
 
@@ -279,26 +301,31 @@ public class Farben {
                 // Random Schritte: (manipuliert um eher nach oben/unten zu gehen)
 
                 if (richtung == 0) { // Schritt nach rechts
-                    if (spielerPosX[spielernum] != spielfeld.length - 2) {
+                    if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
+                    } else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
-//                    else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-//                        bewegeSpieler(spielernum, teamPos);
-//                    }
 
                 } else if (richtung == 1) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 2 || richtung == 4) { // Schritt nach oben
                     if (spielerPosY[spielernum] > 1) {
                         spielerPosY[spielernum]--;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 } else if (richtung == 3 || richtung == 5) { // Schritt nach unten
-                    if (spielerPosY[spielernum] != spielfeld[0].length - 2) {
+                    if (spielerPosY[spielernum] < spielfeld[0].length - 2) {
                         spielerPosY[spielernum]++;
+                    }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
+                        bewegeSpieler(spielernum, teamPos);
                     }
 
                 }
@@ -317,6 +344,10 @@ public class Farben {
 
 
             int[] pos = new int[]{spielerPosX[spielernum], spielerPosY[spielernum]};
+            int[] posN = new int[]{spielerPosX[spielernum],spielerPosY[spielernum]-1};
+            int[] posS = new int[]{spielerPosX[spielernum],spielerPosY[spielernum]+1};
+            int[] posW = new int[]{spielerPosX[spielernum]-1,spielerPosY[spielernum]};
+            int[] posO = new int[]{spielerPosX[spielernum]+1,spielerPosY[spielernum]};
 
             char[] umgebung = scanneUmgebung(spielernum);
 
@@ -330,63 +361,87 @@ public class Farben {
 
             //Gegner angreifen, falls 1 Block entfernt:
             if (Simulationen.zaehlenVier(spielfeld, pos, 'P', false) > 0) {
-                if (umgebung[2] == 'P') {
+                if (umgebung[2] == 'P') { //N
                     int x;
                     int y;
                     int spielernum2 = spielernum;
                     for (int i = 0; i < spielerPosX.length; i++) {
-                        if (pos[0] == spielerPosX[i] && pos[1] == spielerPosY[i]) {
+                        if (posN[0] == spielerPosX[i] && posN[1] == spielerPosY[i]) {
                             x = spielerPosX[i];
                             y = spielerPosY[i];
                             spielernum2 = i;
                             break;
                         }
                     }
-                    if (spielernum2 > 3) {
-                        spielerPosY[spielernum]--;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
+                    if (spielernum < 4) {
+                        if (spielernum2 > 3) {
+                            spielerPosY[spielernum]--;
+                            spielerPosX[spielernum2] = -1;
+                            spielerPosY[spielernum2] = -1;
+                        }
+                    } else {
+                        if (spielernum2 < 4) {
+                            spielerPosY[spielernum]--;
+                            spielerPosX[spielernum2] = -1;
+                            spielerPosY[spielernum2] = -1;
+                        }
                     }
-                } else if (umgebung[5] == 'P') {
+                } else if (umgebung[5] == 'P') { //O
                     int x;
                     int y;
                     int spielernum2 = spielernum;
                     for (int i = 0; i < spielerPosX.length; i++) {
-                        if (pos[0] == spielerPosX[i] && pos[1] == spielerPosY[i]) {
+                        if (posO[0] == spielerPosX[i] && posO[1] == spielerPosY[i]) {
                             x = spielerPosX[i];
                             y = spielerPosY[i];
                             spielernum2 = i;
                             break;
                         }
                     }
-                    if (spielernum2 > 3) {
-                        spielerPosX[spielernum]--;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
+                    if (spielernum < 4) {
+                        if (spielernum2 > 3) {
+                            spielerPosX[spielernum]--;
+                            spielerPosX[spielernum2] = -1;
+                            spielerPosY[spielernum2] = -1;
+                        }
+                    } else {
+                        if (spielernum2 < 4) {
+                            spielerPosX[spielernum]--;
+                            spielerPosX[spielernum2] = -1;
+                            spielerPosY[spielernum2] = -1;
+                        }
                     }
-                } else if (umgebung[7] == 'P') {
+                } else if (umgebung[7] == 'P') { //W
                     int x;
                     int y;
                     int spielernum2 = spielernum;
                     for (int i = 0; i < spielerPosX.length; i++) {
-                        if (pos[0] == spielerPosX[i] && pos[1] == spielerPosY[i]) {
+                        if (posW[0] == spielerPosX[i] && posW[1] == spielerPosY[i]) {
                             x = spielerPosX[i];
                             y = spielerPosY[i];
                             spielernum2 = i;
                             break;
                         }
                     }
-                    if (spielernum2 > 3) {
-                        spielerPosX[spielernum]++;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
+                    if (spielernum < 4) {
+                        if (spielernum2 > 3) {
+                            spielerPosX[spielernum]++;
+                            spielerPosX[spielernum2] = -1;
+                            spielerPosY[spielernum2] = -1;
+                        }
+                    } else {
+                        if (spielernum2 < 4) {
+                            spielerPosX[spielernum]++;
+                            spielerPosX[spielernum2] = -1;
+                            spielerPosY[spielernum2] = -1;
+                        }
                     }
-                } else if (umgebung[10] == 'P') {
+                } else if (umgebung[10] == 'P') { //S
                     int x;
                     int y;
                     int spielernum2 = spielernum;
                     for (int i = 0; i < spielerPosX.length; i++) {
-                        if (pos[0] == spielerPosX[i] && pos[1] == spielerPosY[i]) {
+                        if (posS[0] == spielerPosX[i] && posS[1] == spielerPosY[i]) {
                             x = spielerPosX[i];
                             y = spielerPosY[i];
                             spielernum2 = i;
@@ -424,7 +479,7 @@ public class Farben {
             team = BubbleSort.bubbleSort(team);
             int teamPos = 0;
             for (int i = 0; i < 4; i++) {
-                if (team[i] == spielernum) {
+                if (team[i] == spielerPosX[spielernum]) {
                     teamPos = i;
                 }
             }
