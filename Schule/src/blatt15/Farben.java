@@ -1,6 +1,7 @@
 package blatt15;
 
 import blatt11.BubbleSort;
+import blatt13.Umgebung;
 import blatt14.MultiArrays;
 import blatt14.Simulationen;
 import schisch_visualizer.*;
@@ -11,6 +12,7 @@ public class Farben {
     static int[] spielerPosY = new int[8] ;
     static int[] reihenfolge = new int[8] ;
     static char[][] spielfeld;
+    static boolean spielerBewegt;
 
 
     /**
@@ -201,16 +203,16 @@ public class Farben {
         int richtung = (int) (Math.random() * 6);
         if(spielernum<4) {
             if (teamPos > 1) { // Angriff
-                // Random Schritte: (Manipulliert um eher nach rechts zu gehen)
+                // Random Schritte: (Manipuliert um eher nach links/rechts zu gehen)
 
-                if (richtung == 0 || richtung == 4 || richtung == 5) { // Schritt nach rechts
+                if (richtung == 0 || richtung == 4) { // Schritt nach rechts
                     if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
                         bewegeSpieler(spielernum, teamPos);
                     }
 
-                } else if (richtung == 1) { // Schritt nach links
+                } else if (richtung == 1  || richtung == 5) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
@@ -231,7 +233,7 @@ public class Farben {
                         bewegeSpieler(spielernum, teamPos);
                     }
                 }
-            } else { //Vertiedigung?!
+            } else { //Verteidigung?!
                 // Random Schritte: (manipuliert um eher nach oben/unten zu gehen)
 
                 if (richtung == 0) { // Schritt nach rechts
@@ -266,16 +268,16 @@ public class Farben {
             }
         } else{
             if (teamPos < 2) { // Angriff
-                // Random Schritte: (Manipulliert um eher nach links zu gehen)
+                // Random Schritte: (Manipuliert um eher nach links/rechts zu gehen)
 
-                if (richtung == 0) { // Schritt nach rechts
+                if (richtung == 0 || richtung == 4) { // Schritt nach rechts
                     if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
                         bewegeSpieler(spielernum, teamPos);
                     }
 
-                } else if (richtung == 1 || richtung == 4 || richtung == 5) { // Schritt nach links
+                } else if (richtung == 1 || richtung == 5) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
@@ -297,7 +299,7 @@ public class Farben {
                     }
                 }
 
-            } else { //Vertiedigung?!
+            } else { //Verteidigung?!
                 // Random Schritte: (manipuliert um eher nach oben/unten zu gehen)
 
                 if (richtung == 0) { // Schritt nach rechts
@@ -333,6 +335,187 @@ public class Farben {
         }
     }
 
+    public static void attack (int spielernum, int umgebungCount) {
+        int[] pos = new int[]{spielerPosX[spielernum], spielerPosY[spielernum]};
+        int[] posN = new int[]{spielerPosX[spielernum],spielerPosY[spielernum]-1};
+        int[] posS = new int[]{spielerPosX[spielernum],spielerPosY[spielernum]+1};
+        int[] posW = new int[]{spielerPosX[spielernum]-1,spielerPosY[spielernum]};
+        int[] posO = new int[]{spielerPosX[spielernum]+1,spielerPosY[spielernum]};
+
+        char[] umgebung = scanneUmgebung(spielernum);
+
+            /*Umgebung:
+                   0
+               1   2   3
+           4   5  6(P) 7   8
+               9   10  11
+                   12
+             */
+        if (Simulationen.zaehlenVier(spielfeld, pos, 'P', false) > 0) {
+            if (umgebung[2] == 'P') { //N
+                int x;
+                int y;
+                int spielernum2 = spielernum;
+                //Finde spieler in der Nähe
+                int count = umgebungCount;
+                for (int i = 0; i < 8; i++) {
+                    if (posN[0] == spielerPosX[i] && posN[1] == spielerPosY[i]) {
+                        x = spielerPosX[i];
+                        y = spielerPosY[i];
+                        spielernum2 = i;
+                        count--;
+                        if (count == 0) {
+                            break;
+                        }
+                    }
+                }
+                if (spielernum < 4) {
+                    if (spielernum2 > 3) {
+                        spielerPosY[spielernum]--;
+                        spielerPosX[spielernum2] = -1;
+                        spielerPosY[spielernum2] = -1;
+                        spielerBewegt = true;
+                    } else {
+                        if(umgebungCount<4) {
+                            attack(spielernum, umgebungCount + 1);
+                        }
+                    }
+                } else {
+                    if (spielernum2 < 4) {
+                        spielerPosY[spielernum]--;
+                        spielerPosX[spielernum2] = -1;
+                        spielerPosY[spielernum2] = -1;
+                        spielerBewegt = true;
+                    } else {
+                        if(umgebungCount<4) {
+                            attack(spielernum, umgebungCount + 1);
+                        }
+                    }
+                }
+            } else if (umgebung[5] == 'P') { //O
+                int x;
+                int y;
+                int spielernum2 = spielernum;
+
+                int count = umgebungCount;
+                for (int i = 0; i < 8; i++) {
+                    if (posO[0] == spielerPosX[i] && posO[1] == spielerPosY[i]) {
+                        x = spielerPosX[i];
+                        y = spielerPosY[i];
+                        spielernum2 = i;
+                        count--;
+                        if (count == 0) {
+                            break;
+                        }
+                    }
+                }
+                if (spielernum < 4) {
+                    if (spielernum2 > 3) {
+                        spielerPosX[spielernum]--;
+                        spielerPosX[spielernum2] = -1;
+                        spielerPosY[spielernum2] = -1;
+                        spielerBewegt = true;
+                    } else {
+                        if(umgebungCount<4) {
+                            attack(spielernum, umgebungCount + 1);
+                        }
+                    }
+                } else {
+                    if (spielernum2 < 4) {
+                        spielerPosX[spielernum]--;
+                        spielerPosX[spielernum2] = -1;
+                        spielerPosY[spielernum2] = -1;
+                        spielerBewegt = true;
+                    } else {
+                        if(umgebungCount<4) {
+                            attack(spielernum, umgebungCount + 1);
+                        }
+                    }
+                }
+            } else if (umgebung[7] == 'P') { //W
+                int x;
+                int y;
+                int spielernum2 = spielernum;
+
+                int count = umgebungCount;
+                for (int i = 0; i < 8; i++) {
+                    if (posW[0] == spielerPosX[i] && posW[1] == spielerPosY[i]) {
+                        x = spielerPosX[i];
+                        y = spielerPosY[i];
+                        spielernum2 = i;
+                        count--;
+                        if (count == 0) {
+                            break;
+                        }
+                    }
+                }
+                if (spielernum < 4) {
+                    if (spielernum2 > 3) {
+                        spielerPosX[spielernum]++;
+                        spielerPosX[spielernum2] = -1;
+                        spielerPosY[spielernum2] = -1;
+                        spielerBewegt = true;
+                    } else {
+                        if(umgebungCount<4) {
+                            attack(spielernum, umgebungCount + 1);
+                        }
+                    }
+                } else {
+                    if (spielernum2 < 4) {
+                        spielerPosX[spielernum]++;
+                        spielerPosX[spielernum2] = -1;
+                        spielerPosY[spielernum2] = -1;
+                        spielerBewegt = true;
+                    } else {
+                        if(umgebungCount<4) {
+                            attack(spielernum, umgebungCount + 1);
+                        }
+                    }
+                }
+            } else if (umgebung[10] == 'P') { //S
+                int x;
+                int y;
+                int spielernum2 = spielernum;
+
+                int count = umgebungCount;
+                for (int i = 0; i < 8; i++) {
+                    if (posS[0] == spielerPosX[i] && posS[1] == spielerPosY[i]) {
+                        x = spielerPosX[i];
+                        y = spielerPosY[i];
+                        spielernum2 = i;
+                        count--;
+                        if (count == 0) {
+                            break;
+                        }
+                    }
+                }
+                if (spielernum < 4) {
+                    if (spielernum2 > 3) {
+                        spielerPosY[spielernum]++;
+                        spielerPosX[spielernum2] = -1;
+                        spielerPosY[spielernum2] = -1;
+                        spielerBewegt = true;
+                    } else {
+                        if(umgebungCount<4) {
+                            attack(spielernum, umgebungCount + 1);
+                        }
+                    }
+                } else {
+                    if (spielernum2 < 4) {
+                        spielerPosY[spielernum]++;
+                        spielerPosX[spielernum2] = -1;
+                        spielerPosY[spielernum2] = -1;
+                        spielerBewegt = true;
+                    } else {
+                        if(umgebungCount<4) {
+                            attack(spielernum, umgebungCount + 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     //TODO: Richtige Strategie machen
     public static void zug1 (int spielernum) {
         if ((spielerPosX[spielernum] != -1) && (spielerPosY[spielernum] != -1)) {
@@ -343,149 +526,34 @@ public class Farben {
             }
 
 
-            int[] pos = new int[]{spielerPosX[spielernum], spielerPosY[spielernum]};
-            int[] posN = new int[]{spielerPosX[spielernum],spielerPosY[spielernum]-1};
-            int[] posS = new int[]{spielerPosX[spielernum],spielerPosY[spielernum]+1};
-            int[] posW = new int[]{spielerPosX[spielernum]-1,spielerPosY[spielernum]};
-            int[] posO = new int[]{spielerPosX[spielernum]+1,spielerPosY[spielernum]};
 
-            char[] umgebung = scanneUmgebung(spielernum);
-
-            /*Umgebung:
-                   0
-               1   2   3
-           4   5  6(P) 7   8
-               9   10  11
-                   12
-             */
-
+            spielerBewegt = false;
             //Gegner angreifen, falls 1 Block entfernt:
-            if (Simulationen.zaehlenVier(spielfeld, pos, 'P', false) > 0) {
-                if (umgebung[2] == 'P') { //N
-                    int x;
-                    int y;
-                    int spielernum2 = spielernum;
-                    for (int i = 0; i < spielerPosX.length; i++) {
-                        if (posN[0] == spielerPosX[i] && posN[1] == spielerPosY[i]) {
-                            x = spielerPosX[i];
-                            y = spielerPosY[i];
-                            spielernum2 = i;
-                            break;
-                        }
+            attack(spielernum,1);
+
+            if(spielerBewegt == false) {
+                //Angriff oder Verteidigung
+                int[] team = new int[4];
+                if (spielernum < 4) {
+                    for (int i = 0; i < 4; i++) {
+                        team[i] = spielerPosX[i];
                     }
-                    if (spielernum < 4) {
-                        if (spielernum2 > 3) {
-                            spielerPosY[spielernum]--;
-                            spielerPosX[spielernum2] = -1;
-                            spielerPosY[spielernum2] = -1;
-                        }
-                    } else {
-                        if (spielernum2 < 4) {
-                            spielerPosY[spielernum]--;
-                            spielerPosX[spielernum2] = -1;
-                            spielerPosY[spielernum2] = -1;
-                        }
-                    }
-                } else if (umgebung[5] == 'P') { //O
-                    int x;
-                    int y;
-                    int spielernum2 = spielernum;
-                    for (int i = 0; i < spielerPosX.length; i++) {
-                        if (posO[0] == spielerPosX[i] && posO[1] == spielerPosY[i]) {
-                            x = spielerPosX[i];
-                            y = spielerPosY[i];
-                            spielernum2 = i;
-                            break;
-                        }
-                    }
-                    if (spielernum < 4) {
-                        if (spielernum2 > 3) {
-                            spielerPosX[spielernum]--;
-                            spielerPosX[spielernum2] = -1;
-                            spielerPosY[spielernum2] = -1;
-                        }
-                    } else {
-                        if (spielernum2 < 4) {
-                            spielerPosX[spielernum]--;
-                            spielerPosX[spielernum2] = -1;
-                            spielerPosY[spielernum2] = -1;
-                        }
-                    }
-                } else if (umgebung[7] == 'P') { //W
-                    int x;
-                    int y;
-                    int spielernum2 = spielernum;
-                    for (int i = 0; i < spielerPosX.length; i++) {
-                        if (posW[0] == spielerPosX[i] && posW[1] == spielerPosY[i]) {
-                            x = spielerPosX[i];
-                            y = spielerPosY[i];
-                            spielernum2 = i;
-                            break;
-                        }
-                    }
-                    if (spielernum < 4) {
-                        if (spielernum2 > 3) {
-                            spielerPosX[spielernum]++;
-                            spielerPosX[spielernum2] = -1;
-                            spielerPosY[spielernum2] = -1;
-                        }
-                    } else {
-                        if (spielernum2 < 4) {
-                            spielerPosX[spielernum]++;
-                            spielerPosX[spielernum2] = -1;
-                            spielerPosY[spielernum2] = -1;
-                        }
-                    }
-                } else if (umgebung[10] == 'P') { //S
-                    int x;
-                    int y;
-                    int spielernum2 = spielernum;
-                    for (int i = 0; i < spielerPosX.length; i++) {
-                        if (posS[0] == spielerPosX[i] && posS[1] == spielerPosY[i]) {
-                            x = spielerPosX[i];
-                            y = spielerPosY[i];
-                            spielernum2 = i;
-                            break;
-                        }
-                    }
-                    if (spielernum < 4) {
-                        if (spielernum2 > 3) {
-                            spielerPosY[spielernum]++;
-                            spielerPosX[spielernum2] = -1;
-                            spielerPosY[spielernum2] = -1;
-                        }
-                    } else {
-                        if (spielernum2 < 4) {
-                            spielerPosY[spielernum]++;
-                            spielerPosX[spielernum2] = -1;
-                            spielerPosY[spielernum2] = -1;
-                        }
+                } else {
+                    for (int i = 0; i < 4; i++) {
+                        team[i] = spielerPosX[i + 4];
                     }
                 }
-            }
 
-            //Angriff oder Verteidigung
-            int[] team = new int[4];
-            if (spielernum < 4) {
+                team = BubbleSort.bubbleSort(team);
+                int teamPos = 0;
                 for (int i = 0; i < 4; i++) {
-                    team[i] = spielerPosX[i];
+                    if (team[i] == spielerPosX[spielernum]) {
+                        teamPos = i;
+                    }
                 }
-            } else {
-                for (int i = 0; i < 4; i++) {
-                    team[i] = spielerPosX[i + 4];
-                }
+
+                bewegeSpieler(spielernum, teamPos);
             }
-
-            team = BubbleSort.bubbleSort(team);
-            int teamPos = 0;
-            for (int i = 0; i < 4; i++) {
-                if (team[i] == spielerPosX[spielernum]) {
-                    teamPos = i;
-                }
-            }
-
-            bewegeSpieler(spielernum, teamPos);
-
             spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = 'P';
         }
     }
