@@ -147,7 +147,7 @@ public class OasenSuche {
             if(spielerPosition!=null) {
                 energie = energiewert;
                 for (; energie > 0; energie--) {
-                    int wasserNaehe = Simulationen.zaehlenAcht(spielfeld, spielerPosition, '2', false);
+                    int wasserNaehe = Simulationen.zaehlenAcht(spielfeld, spielerPosition[0], spielerPosition[1], '2', false);
                     if (wasserNaehe > 0) {
                         System.out.println("Wasser gefunden! Spieler lebt!");
                         break;

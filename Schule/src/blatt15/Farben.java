@@ -174,19 +174,19 @@ public class Farben {
         int[] posO = new int[]{spielerPosX[spielernum]+1,spielerPosY[spielernum]};
 
         char[] umgebung = new char[13];
-        umgebung[0] = Simulationen.getNorden(spielfeld,posN);   //0
-        umgebung[1] = Simulationen.getNordWest(spielfeld,pos);  //1
-        umgebung[2] = Simulationen.getNorden(spielfeld,pos);    //2
-        umgebung[3] = Simulationen.getNordOst(spielfeld,pos);   //3
-        umgebung[4] = Simulationen.getWesten(spielfeld,posW);   //4
-        umgebung[5] = Simulationen.getWesten(spielfeld,pos);    //5
-        umgebung[6] = 'P';                                      //6
-        umgebung[7] = Simulationen.getOsten(spielfeld,pos);     //7
-        umgebung[8] = Simulationen.getOsten(spielfeld,posO);    //8
-        umgebung[9] = Simulationen.getSuedWest(spielfeld,pos);  //9
-        umgebung[10] = Simulationen.getSueden(spielfeld,pos);    //10
-        umgebung[11] = Simulationen.getSuedOst(spielfeld,pos);   //11
-        umgebung[12] = Simulationen.getSueden(spielfeld,posS);   //12
+        umgebung[0] = Simulationen.getNorden(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum]-1,false);     //0
+        umgebung[1] = Simulationen.getNordWest(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum],false);        //1
+        umgebung[2] = Simulationen.getNorden(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum],false);          //2
+        umgebung[3] = Simulationen.getNordOst(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum],false);         //3
+        umgebung[4] = Simulationen.getWesten(spielfeld,spielerPosX[spielernum]-1,spielerPosY[spielernum],false);     //4
+        umgebung[5] = Simulationen.getWesten(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum],false);          //5
+        umgebung[6] = 'P';                                                                                                   //6
+        umgebung[7] = Simulationen.getOsten(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum],false);           //7
+        umgebung[8] = Simulationen.getOsten(spielfeld,spielerPosX[spielernum]+1,spielerPosY[spielernum],false);      //8
+        umgebung[9] = Simulationen.getSuedWest(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum],false);        //9
+        umgebung[10] = Simulationen.getSueden(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum],false);         //10
+        umgebung[11] = Simulationen.getSuedOst(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum],false);        //11
+        umgebung[12] = Simulationen.getSueden(spielfeld,spielerPosX[spielernum],spielerPosY[spielernum]+1,false);    //12
 
         /*Umgebung:
                0
@@ -198,6 +198,11 @@ public class Farben {
         return umgebung;
     }
 
+    /**
+     * bewegt Spieler zufällig; unterscheidet zwischen hinten und vorne
+     * @param spielernum Spielernummer
+     * @param teamPos Position im Team
+     */
     public static void bewegeSpieler(int spielernum,int teamPos) {
 
         int richtung = (int) (Math.random() * 6);
@@ -335,12 +340,12 @@ public class Farben {
         }
     }
 
+    /**
+     * Besigt andere Spieler, falls diese 1 fällt entfernt sind
+     * @param spielernum Spielernummer
+     * @param umgebungCount normal 1; durch rekursion
+     */
     public static void attack (int spielernum, int umgebungCount) {
-        int[] pos = new int[]{spielerPosX[spielernum], spielerPosY[spielernum]};
-        int[] posN = new int[]{spielerPosX[spielernum],spielerPosY[spielernum]-1};
-        int[] posS = new int[]{spielerPosX[spielernum],spielerPosY[spielernum]+1};
-        int[] posW = new int[]{spielerPosX[spielernum]-1,spielerPosY[spielernum]};
-        int[] posO = new int[]{spielerPosX[spielernum]+1,spielerPosY[spielernum]};
 
         char[] umgebung = scanneUmgebung(spielernum);
 
@@ -351,7 +356,7 @@ public class Farben {
                9   10  11
                    12
              */
-        if (Simulationen.zaehlenVier(spielfeld, pos, 'P', false) > 0) {
+        if (Simulationen.zaehlenVier(spielfeld, spielerPosX[spielernum], spielerPosY[spielernum], 'P', false) > 0) {
             if (umgebung[2] == 'P') { //N
                 int x;
                 int y;
@@ -359,7 +364,7 @@ public class Farben {
                 //Finde spieler in der Nähe
                 int count = umgebungCount;
                 for (int i = 0; i < 8; i++) {
-                    if (posN[0] == spielerPosX[i] && posN[1] == spielerPosY[i]) {
+                    if (spielerPosX[spielernum] == spielerPosX[i] && (spielerPosY[spielernum]-1) == spielerPosY[i]) {
                         x = spielerPosX[i];
                         y = spielerPosY[i];
                         spielernum2 = i;
@@ -399,7 +404,7 @@ public class Farben {
 
                 int count = umgebungCount;
                 for (int i = 0; i < 8; i++) {
-                    if (posO[0] == spielerPosX[i] && posO[1] == spielerPosY[i]) {
+                    if ((spielerPosX[spielernum]+1) == spielerPosX[i] && spielerPosY[spielernum] == spielerPosY[i]) {
                         x = spielerPosX[i];
                         y = spielerPosY[i];
                         spielernum2 = i;
@@ -439,7 +444,7 @@ public class Farben {
 
                 int count = umgebungCount;
                 for (int i = 0; i < 8; i++) {
-                    if (posW[0] == spielerPosX[i] && posW[1] == spielerPosY[i]) {
+                    if ((spielerPosX[spielernum]-1) == spielerPosX[i] && spielerPosY[spielernum] == spielerPosY[i]) {
                         x = spielerPosX[i];
                         y = spielerPosY[i];
                         spielernum2 = i;
@@ -479,7 +484,7 @@ public class Farben {
 
                 int count = umgebungCount;
                 for (int i = 0; i < 8; i++) {
-                    if (posS[0] == spielerPosX[i] && posS[1] == spielerPosY[i]) {
+                    if (spielerPosX[spielernum] == spielerPosX[i] && (spielerPosY[spielernum]+1) == spielerPosY[i]) {
                         x = spielerPosX[i];
                         y = spielerPosY[i];
                         spielernum2 = i;
@@ -516,6 +521,10 @@ public class Farben {
         }
     }
 
+    /**
+     * Verfolgt die Spur des gegnerischen Teams, falls es auf dieses stößt
+     * @param spielernum Spielernummer
+     */
     public static void follow(int spielernum){
         char farbeGegner = '7';
 
@@ -560,7 +569,10 @@ public class Farben {
         }
     }
 
-    //TODO: Richtige Strategie machen
+    /**
+     * Zug1
+     * @param spielernum Spielernummer
+     */
     public static void zug1 (int spielernum) {
         if ((spielerPosX[spielernum] != -1) && (spielerPosY[spielernum] != -1)) {
             if (spielernum > 3) {
@@ -606,6 +618,10 @@ public class Farben {
         }
     }
 
+    /**
+     * Zug2 (ruft zug 1 auf)
+     * @param spielernum Spielernummer
+     */
     public static void zug2 (int spielernum){
         zug1(spielernum);
     }
