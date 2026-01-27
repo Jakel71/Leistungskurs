@@ -516,6 +516,50 @@ public class Farben {
         }
     }
 
+    public static void follow(int spielernum){
+        char farbeGegner = '7';
+
+        if (spielernum < 4) {
+            farbeGegner = '9';
+        }
+
+        char[] umgebung = scanneUmgebung(spielernum);
+                    /*Umgebung:
+                   0
+               1   2   3
+           4   5  6(P) 7   8
+               9   10  11
+                   12
+             */
+        if(umgebung[2] == farbeGegner){
+            if(umgebung[0] != 'P' && umgebung[1] !='P' && umgebung[3] != 'P'){
+                spielerPosY[spielernum] -= 1;
+                spielerBewegt = true;
+                return;
+            }
+        }
+        if(umgebung[5] == farbeGegner){
+            if(umgebung[4] != 'P' && umgebung[1] !='P' && umgebung[9] != 'P'){
+                spielerPosX[spielernum] -= 1;
+                spielerBewegt = true;
+                return;
+            }
+        }
+        if(umgebung[7] == farbeGegner){
+            if(umgebung[8] != 'P' && umgebung[3] !='P' && umgebung[11] != 'P'){
+                spielerPosX[spielernum] +=1;
+                spielerBewegt = true;
+                return;
+            }
+        }
+        if(umgebung[10] == farbeGegner){
+            if(umgebung[9] != 'P' && umgebung[12] !='P' && umgebung[11] != 'P'){
+                spielerPosY[spielernum] +=1;
+                spielerBewegt = true;
+            }
+        }
+    }
+
     //TODO: Richtige Strategie machen
     public static void zug1 (int spielernum) {
         if ((spielerPosX[spielernum] != -1) && (spielerPosY[spielernum] != -1)) {
@@ -530,6 +574,10 @@ public class Farben {
             spielerBewegt = false;
             //Gegner angreifen, falls 1 Block entfernt:
             attack(spielernum,1);
+
+            if(spielerBewegt==false){
+                follow(spielernum);
+            }
 
             if(spielerBewegt == false) {
                 //Angriff oder Verteidigung
