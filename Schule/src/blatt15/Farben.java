@@ -13,6 +13,7 @@ public class Farben {
     static int[] reihenfolge = new int[8] ;
     static char[][] spielfeld;
     static boolean spielerBewegt;
+    static int gescannteFelder = 0;
 
 
     /**
@@ -203,7 +204,7 @@ public class Farben {
      * @param spielernum Spielernummer
      * @param teamPos Position im Team
      */
-    public static void bewegeSpieler(int spielernum,int teamPos) {
+    public static void bewegeSpielerR(int spielernum,int teamPos) {
 
         int richtung = (int) (Math.random() * 6);
         if(spielernum<4) {
@@ -214,28 +215,28 @@ public class Farben {
                     if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 1  || richtung == 5) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 2) { // Schritt nach oben
                     if (spielerPosY[spielernum] > 1) {
                         spielerPosY[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 3) { // Schritt nach unten
                     if (spielerPosY[spielernum] < spielfeld[0].length - 2) {
                         spielerPosY[spielernum]++;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
                 }
             } else { //Verteidigung?!
@@ -245,28 +246,28 @@ public class Farben {
                     if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
                     } else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 1) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 2 || richtung == 4) { // Schritt nach oben
                     if (spielerPosY[spielernum] > 1) {
                         spielerPosY[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 3 || richtung == 5) { // Schritt nach unten
                     if (spielerPosY[spielernum] < spielfeld[0].length - 2) {
                         spielerPosY[spielernum]++;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 }
@@ -279,28 +280,28 @@ public class Farben {
                     if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 1 || richtung == 5) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 2) { // Schritt nach oben
                     if (spielerPosY[spielernum] > 1) {
                         spielerPosY[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 3) { // Schritt nach unten
                     if (spielerPosY[spielernum] < spielfeld[0].length - 2) {
                         spielerPosY[spielernum]++;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
                 }
 
@@ -311,31 +312,129 @@ public class Farben {
                     if (spielerPosX[spielernum] < spielfeld.length - 2) {
                         spielerPosX[spielernum]++;
                     } else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 1) { // Schritt nach links
                     if (spielerPosX[spielernum] > 1) {
                         spielerPosX[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 2 || richtung == 4) { // Schritt nach oben
                     if (spielerPosY[spielernum] > 1) {
                         spielerPosY[spielernum]--;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 } else if (richtung == 3 || richtung == 5) { // Schritt nach unten
                     if (spielerPosY[spielernum] < spielfeld[0].length - 2) {
                         spielerPosY[spielernum]++;
                     }else { // Falls Spieler in Wand laufen würde, wird er jetzt erneut berechnet
-                        bewegeSpieler(spielernum, teamPos);
+                        bewegeSpielerR(spielernum, teamPos);
                     }
 
                 }
+            }
+        }
+    }
+    /**
+     * bewegt Spieler zufällig auf ein nicht selbst eingefärbtes Feld; unterscheidet zwischen hinten und vorne
+     * @param spielernum Spielernummer
+     * @param teamPos Position im Team
+     */
+    public static void bewegeSpielerO(int spielernum,int teamPos) {
+        if(gescannteFelder>=4){
+            return;
+        }
+
+        char farbeTeam = '9';
+
+        if (spielernum < 4) {
+            farbeTeam = '7';
+        }
+        int richtung = (int) (Math.random() * 6);
+
+        if (teamPos > 1) { // Angriff
+            // Random Schritte: (Manipuliert um eher nach links/rechts zu gehen)
+
+            if (richtung == 0 || richtung == 4) { // Schritt nach rechts
+                if (spielerPosX[spielernum] < spielfeld.length - 2 && (spielfeld[spielerPosX[spielernum]+1][spielerPosY[spielernum]] != farbeTeam)) {
+                    spielerPosX[spielernum]++;
+                    spielerBewegt = true;
+                }else { // Falls Spieler in Wand laufen würde oder ein eigenes Feld erneut einfärben würde, wird er jetzt erneut berechnet
+                    gescannteFelder++;
+                    bewegeSpielerO(spielernum, teamPos);
+                }
+
+            } else if (richtung == 1  || richtung == 5) { // Schritt nach links
+                if (spielerPosX[spielernum] > 1 && (spielfeld[spielerPosX[spielernum]-1][spielerPosY[spielernum]] != farbeTeam)) {
+                    spielerPosX[spielernum]--;
+                    spielerBewegt = true;
+                }else { // Falls Spieler in Wand laufen würde oder ein eigenes Feld erneut einfärben würde, wird er jetzt erneut berechnet
+                    gescannteFelder++;
+                    bewegeSpielerO(spielernum, teamPos);
+                }
+
+            } else if (richtung == 2) { // Schritt nach oben
+                if (spielerPosY[spielernum] > 1 && (spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]-1] != farbeTeam)) {
+                    spielerPosY[spielernum]--;
+                    spielerBewegt = true;
+                }else { // Falls Spieler in Wand laufen würde oder ein eigenes Feld erneut einfärben würde, wird er jetzt erneut berechnet
+                    gescannteFelder++;
+                    bewegeSpielerO(spielernum, teamPos);
+                }
+
+            } else if (richtung == 3) { // Schritt nach unten
+                if (spielerPosY[spielernum] < spielfeld[0].length - 2 && (spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]+1] != farbeTeam)) {
+                    spielerPosY[spielernum]++;
+                    spielerBewegt = true;
+                }else { // Falls Spieler in Wand laufen würde oder ein eigenes Feld erneut einfärben würde, wird er jetzt erneut berechnet
+                    gescannteFelder++;
+                    bewegeSpielerO(spielernum, teamPos);
+                }
+            }
+        } else { //Verteidigung?!
+            // Random Schritte: (manipuliert um eher nach oben/unten zu gehen)
+
+            if (richtung == 0) { // Schritt nach rechts
+                if (spielerPosX[spielernum] < spielfeld.length - 2 && (spielfeld[spielerPosX[spielernum]+1][spielerPosY[spielernum]] != farbeTeam)) {
+                    spielerPosX[spielernum]++;
+                    spielerBewegt = true;
+                } else { // Falls Spieler in Wand laufen würde oder ein eigenes Feld erneut einfärben würde, wird er jetzt erneut berechnet
+                    gescannteFelder++;
+                    bewegeSpielerO(spielernum, teamPos);
+                }
+
+            } else if (richtung == 1) { // Schritt nach links
+                if (spielerPosX[spielernum] > 1 && (spielfeld[spielerPosX[spielernum]-1][spielerPosY[spielernum]] != farbeTeam)) {
+                    spielerPosX[spielernum]--;
+                    spielerBewegt = true;
+                }else { // Falls Spieler in Wand laufen würde oder ein eigenes Feld erneut einfärben würde, wird er jetzt erneut berechnet
+                    gescannteFelder++;
+                    bewegeSpielerO(spielernum, teamPos);
+                }
+
+            } else if (richtung == 2 || richtung == 4) { // Schritt nach oben
+                if (spielerPosY[spielernum] > 1 && (spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]-1] != farbeTeam)) {
+                    spielerPosY[spielernum]--;
+                    spielerBewegt = true;
+                }else { // Falls Spieler in Wand laufen würde oder ein eigenes Feld erneut einfärben würde, wird er jetzt erneut berechnet
+                    gescannteFelder++;
+                    bewegeSpielerO(spielernum, teamPos);
+                }
+
+            } else if (richtung == 3 || richtung == 5) { // Schritt nach unten
+                if (spielerPosY[spielernum] < spielfeld[0].length - 2 && (spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]+1] != farbeTeam)) {
+                    spielerPosY[spielernum]++;
+                    spielerBewegt = true;
+                }else {  // Falls Spieler in Wand laufen würde oder ein eigenes Feld erneut einfärben würde, wird er jetzt erneut berechnet
+                    gescannteFelder++;
+                    bewegeSpielerO(spielernum, teamPos);
+                }
+
             }
         }
     }
@@ -611,8 +710,32 @@ public class Farben {
                         teamPos = i;
                     }
                 }
+                gescannteFelder = 0;
+                bewegeSpielerO(spielernum, teamPos);
+            }
 
-                bewegeSpieler(spielernum, teamPos);
+            if(spielerBewegt == false) {
+                //Angriff oder Verteidigung
+                int[] team = new int[4];
+                if (spielernum < 4) {
+                    for (int i = 0; i < 4; i++) {
+                        team[i] = spielerPosX[i];
+                    }
+                } else {
+                    for (int i = 0; i < 4; i++) {
+                        team[i] = spielerPosX[i + 4];
+                    }
+                }
+
+                team = BubbleSort.bubbleSort(team);
+                int teamPos = 0;
+                for (int i = 0; i < 4; i++) {
+                    if (team[i] == spielerPosX[spielernum]) {
+                        teamPos = i;
+                    }
+                }
+
+                bewegeSpielerR(spielernum, teamPos);
             }
             spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = 'P';
         }
