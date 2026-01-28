@@ -3,6 +3,7 @@ package blatt15;
 import blatt11.BubbleSort;
 import blatt13.Umgebung;
 import blatt14.MultiArrays;
+import blatt14.OasenSuche;
 import blatt14.Simulationen;
 import schisch_visualizer.*;
 
@@ -340,6 +341,7 @@ public class Farben {
             }
         }
     }
+
     /**
      * bewegt Spieler zufällig auf ein nicht selbst eingefärbtes Feld; unterscheidet zwischen hinten und vorne
      * @param spielernum Spielernummer
@@ -442,9 +444,8 @@ public class Farben {
     /**
      * Besigt andere Spieler, falls diese 1 fällt entfernt sind
      * @param spielernum Spielernummer
-     * @param umgebungCount normal 1; durch rekursion
      */
-    public static void attack (int spielernum, int umgebungCount) {
+    public static void attack (int spielernum) {
 
         char[] umgebung = scanneUmgebung(spielernum);
 
@@ -456,167 +457,106 @@ public class Farben {
                    12
              */
         if (Simulationen.zaehlenVier(spielfeld, spielerPosX[spielernum], spielerPosY[spielernum], 'P', false) > 0) {
-            if (umgebung[2] == 'P') { //N
-                int x;
-                int y;
-                int spielernum2 = spielernum;
-                //Finde spieler in der Nähe
-                int count = umgebungCount;
-                for (int i = 0; i < 8; i++) {
-                    if (spielerPosX[spielernum] == spielerPosX[i] && (spielerPosY[spielernum]-1) == spielerPosY[i]) {
-                        x = spielerPosX[i];
-                        y = spielerPosY[i];
-                        spielernum2 = i;
-                        count--;
-                        if (count == 0) {
-                            break;
-                        }
-                    }
-                }
-                if (spielernum < 4) {
-                    if (spielernum2 > 3) {
-                        spielerPosY[spielernum]--;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
-                        spielerBewegt = true;
-                    } else {
-                        if(umgebungCount<4) {
-                            attack(spielernum, umgebungCount + 1);
-                        }
-                    }
-                } else {
-                    if (spielernum2 < 4) {
-                        spielerPosY[spielernum]--;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
-                        spielerBewegt = true;
-                    } else {
-                        if(umgebungCount<4) {
-                            attack(spielernum, umgebungCount + 1);
-                        }
-                    }
-                }
-            } else if (umgebung[5] == 'P') { //O
-                int x;
-                int y;
-                int spielernum2 = spielernum;
+            int x;
+            int y;
+            int spielernum2 = spielernum;
+            //Finde spieler in der Nähe
 
-                int count = umgebungCount;
-                for (int i = 0; i < 8; i++) {
-                    if ((spielerPosX[spielernum]+1) == spielerPosX[i] && spielerPosY[spielernum] == spielerPosY[i]) {
-                        x = spielerPosX[i];
-                        y = spielerPosY[i];
-                        spielernum2 = i;
-                        count--;
-                        if (count == 0) {
-                            break;
-                        }
-                    }
-                }
-                if (spielernum < 4) {
-                    if (spielernum2 > 3) {
-                        spielerPosX[spielernum]--;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
-                        spielerBewegt = true;
-                    } else {
-                        if(umgebungCount<4) {
-                            attack(spielernum, umgebungCount + 1);
-                        }
-                    }
-                } else {
-                    if (spielernum2 < 4) {
-                        spielerPosX[spielernum]--;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
-                        spielerBewegt = true;
-                    } else {
-                        if(umgebungCount<4) {
-                            attack(spielernum, umgebungCount + 1);
-                        }
-                    }
-                }
-            } else if (umgebung[7] == 'P') { //W
-                int x;
-                int y;
-                int spielernum2 = spielernum;
+            for (int i = 0; i < 8; i++) {
 
-                int count = umgebungCount;
-                for (int i = 0; i < 8; i++) {
-                    if ((spielerPosX[spielernum]-1) == spielerPosX[i] && spielerPosY[spielernum] == spielerPosY[i]) {
-                        x = spielerPosX[i];
-                        y = spielerPosY[i];
-                        spielernum2 = i;
-                        count--;
-                        if (count == 0) {
-                            break;
+                if (spielerPosX[spielernum] == spielerPosX[i] && (spielerPosY[spielernum]-1) == spielerPosY[i]) {
+                    spielernum2 = i;
+                    if (umgebung[2] == 'P') { //N
+                        if (spielernum < 4) {
+                            if (spielernum2 > 3) {
+                                spielerPosY[spielernum]--;
+                                spielerPosX[spielernum2] = -1;
+                                spielerPosY[spielernum2] = -1;
+                                spielerBewegt = true;
+                                return;
+                            }
+                        } else {
+                            if (spielernum2 < 4) {
+                                spielerPosY[spielernum]--;
+                                spielerPosX[spielernum2] = -1;
+                                spielerPosY[spielernum2] = -1;
+                                spielerBewegt = true;
+                                return;
+                            }
                         }
                     }
                 }
-                if (spielernum < 4) {
-                    if (spielernum2 > 3) {
-                        spielerPosX[spielernum]++;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
-                        spielerBewegt = true;
-                    } else {
-                        if(umgebungCount<4) {
-                            attack(spielernum, umgebungCount + 1);
-                        }
-                    }
-                } else {
-                    if (spielernum2 < 4) {
-                        spielerPosX[spielernum]++;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
-                        spielerBewegt = true;
-                    } else {
-                        if(umgebungCount<4) {
-                            attack(spielernum, umgebungCount + 1);
-                        }
-                    }
-                }
-            } else if (umgebung[10] == 'P') { //S
-                int x;
-                int y;
-                int spielernum2 = spielernum;
 
-                int count = umgebungCount;
-                for (int i = 0; i < 8; i++) {
-                    if (spielerPosX[spielernum] == spielerPosX[i] && (spielerPosY[spielernum]+1) == spielerPosY[i]) {
-                        x = spielerPosX[i];
-                        y = spielerPosY[i];
-                        spielernum2 = i;
-                        count--;
-                        if (count == 0) {
-                            break;
+                if ((spielerPosX[spielernum]-1) == spielerPosX[i] && spielerPosY[spielernum] == spielerPosY[i]) {
+                    spielernum2 = i;
+                    if (umgebung[5] == 'P') { //W
+                        if (spielernum < 4) {
+                            if (spielernum2 > 3) {
+                                spielerPosX[spielernum]--;
+                                spielerPosX[spielernum2] = -1;
+                                spielerPosY[spielernum2] = -1;
+                                spielerBewegt = true;
+                                return;
+                            }
+                        } else {
+                            if (spielernum2 < 4) {
+                                spielerPosX[spielernum]--;
+                                spielerPosX[spielernum2] = -1;
+                                spielerPosY[spielernum2] = -1;
+                                spielerBewegt = true;
+                                return;
+                            }
                         }
                     }
                 }
-                if (spielernum < 4) {
-                    if (spielernum2 > 3) {
-                        spielerPosY[spielernum]++;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
-                        spielerBewegt = true;
-                    } else {
-                        if(umgebungCount<4) {
-                            attack(spielernum, umgebungCount + 1);
+
+                if ((spielerPosX[spielernum]+1) == spielerPosX[i] && spielerPosY[spielernum] == spielerPosY[i]) {
+                    spielernum2 = i;
+                    if (umgebung[7] == 'P') { //O
+
+                        if (spielernum < 4) {
+                            if (spielernum2 > 3) {
+                                spielerPosX[spielernum]++;
+                                spielerPosX[spielernum2] = -1;
+                                spielerPosY[spielernum2] = -1;
+                                spielerBewegt = true;
+                                return;
+                            }
+                        } else {
+                            if (spielernum2 < 4) {
+                                spielerPosX[spielernum]++;
+                                spielerPosX[spielernum2] = -1;
+                                spielerPosY[spielernum2] = -1;
+                                spielerBewegt = true;
+                                return;
+                            }
                         }
                     }
-                } else {
-                    if (spielernum2 < 4) {
-                        spielerPosY[spielernum]++;
-                        spielerPosX[spielernum2] = -1;
-                        spielerPosY[spielernum2] = -1;
-                        spielerBewegt = true;
-                    } else {
-                        if(umgebungCount<4) {
-                            attack(spielernum, umgebungCount + 1);
+                }
+
+                if (spielerPosX[spielernum] == spielerPosX[i] && (spielerPosY[spielernum]+1) == spielerPosY[i]) {
+                    spielernum2 = i;
+                    if (umgebung[10] == 'P') { //S
+
+                        if (spielernum < 4) {
+                            if (spielernum2 > 3) {
+                                spielerPosY[spielernum]++;
+                                spielerPosX[spielernum2] = -1;
+                                spielerPosY[spielernum2] = -1;
+                                spielerBewegt = true;
+                            }
+                        } else {
+                            if (spielernum2 < 4) {
+                                spielerPosY[spielernum]++;
+                                spielerPosX[spielernum2] = -1;
+                                spielerPosY[spielernum2] = -1;
+                                spielerBewegt = true;
+                            }
                         }
                     }
                 }
             }
+
         }
     }
 
@@ -681,10 +621,10 @@ public class Farben {
             }
 
 
-
+            //TODO: Bug fixen: No Attack with respawn
             spielerBewegt = false;
             //Gegner angreifen, falls 1 Block entfernt:
-            attack(spielernum,1);
+            attack(spielernum);
 
             if(spielerBewegt==false){
                 follow(spielernum);
@@ -804,7 +744,36 @@ public class Farben {
         sv.start();
     }
 
+    public static void schrittD(){
+        reihenfolge();
+        spielerPosX[0]=10;
+        spielerPosY[0]=10;
+        spielfeld[spielerPosX[0]][spielerPosY[0]]='P';
+
+        spielerPosX[5]=9;
+        spielerPosY[5]=10;
+        spielfeld[spielerPosX[5]][spielerPosY[5]]='P';
+        sv.step(spielfeld);
+
+        for(int i=0; i<reihenfolge.length; i++){
+            if(reihenfolge[i]>3){
+                zug2(reihenfolge[i]);
+            } else{
+                zug1(reihenfolge[i]);
+            }
+            sv.step(spielfeld);
+        }
+
+        for(int i=0; i<spielerPosX.length; i++){
+            if(spielerPosX[i]==-1 && spielerPosY[i]==-1){
+                respawn(i);
+                System.out.println(i+1);
+                sv.step(spielfeld);
+            }
+        }
+    }
+
     public static void main (String [] args){
-    simulation(1000);
+        simulation(1000);
     }
 }
