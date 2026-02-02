@@ -1,9 +1,7 @@
 package blatt15;
 
 import blatt11.BubbleSort;
-import blatt13.Umgebung;
 import blatt14.MultiArrays;
-import blatt14.OasenSuche;
 import blatt14.Simulationen;
 import schisch_visualizer.*;
 
@@ -157,7 +155,7 @@ public class Farben {
         for(int i=0; i<reihenfolge.length; i++){
             int pos;
             do{
-                pos = (int)(Math.random()*8);
+                pos = (int)(Math.random()*(reihenfolge.length+1));
             } while (reihenfolge[pos] !=-1);
             reihenfolge[pos] = i;
         }
@@ -209,7 +207,7 @@ public class Farben {
 
         int richtung = (int) (Math.random() * 6);
         if(spielernum<4) {
-            if (teamPos > 1) { // Angriff
+            if (teamPos < 2) { // Angriff
                 // Random Schritte: (Manipuliert um eher nach links/rechts zu gehen)
 
                 if (richtung == 0 || richtung == 4) { // Schritt nach rechts
@@ -274,7 +272,7 @@ public class Farben {
                 }
             }
         } else{
-            if (teamPos < 2) { // Angriff
+            if (teamPos > 1) { // Angriff
                 // Random Schritte: (Manipuliert um eher nach links/rechts zu gehen)
 
                 if (richtung == 0 || richtung == 4) { // Schritt nach rechts
@@ -457,8 +455,7 @@ public class Farben {
                    12
              */
         if (Simulationen.zaehlenVier(spielfeld, spielerPosX[spielernum], spielerPosY[spielernum], 'P', false) > 0) {
-            int x;
-            int y;
+
             int spielernum2 = spielernum;
             //Finde spieler in der Nähe
 
@@ -620,62 +617,41 @@ public class Farben {
                 spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = '7';
             }
 
-
-            //TODO: Bug fixen: No Attack with respawn
             spielerBewegt = false;
             //Gegner angreifen, falls 1 Block entfernt:
             attack(spielernum);
 
-            if(spielerBewegt==false){
+            if(spielerBewegt==false) {
                 follow(spielernum);
-            }
 
-            if(spielerBewegt == false) {
-                //Angriff oder Verteidigung
-                int[] team = new int[4];
-                if (spielernum < 4) {
-                    for (int i = 0; i < 4; i++) {
-                        team[i] = spielerPosX[i];
+
+                if (spielerBewegt == false) {
+                    //Angriff oder Verteidigung
+                    int[] team = new int[4];
+                    if (spielernum < 4) {
+                        for (int i = 0; i < 4; i++) {
+                            team[i] = spielerPosX[i];
+                        }
+                    } else {
+                        for (int i = 0; i < 4; i++) {
+                            team[i] = spielerPosX[i + 4];
+                        }
                     }
-                } else {
+
+                    team = BubbleSort.bubbleSort(team);
+                    int teamPos = 0;
                     for (int i = 0; i < 4; i++) {
-                        team[i] = spielerPosX[i + 4];
+                        if (team[i] == spielerPosX[spielernum]) {
+                            teamPos = i;
+                        }
+                    }
+                    gescannteFelder = 0;
+                    bewegeSpielerO(spielernum, teamPos);
+
+                    if (spielerBewegt == false) {
+                        bewegeSpielerR(spielernum, teamPos);
                     }
                 }
-
-                team = BubbleSort.bubbleSort(team);
-                int teamPos = 0;
-                for (int i = 0; i < 4; i++) {
-                    if (team[i] == spielerPosX[spielernum]) {
-                        teamPos = i;
-                    }
-                }
-                gescannteFelder = 0;
-                bewegeSpielerO(spielernum, teamPos);
-            }
-
-            if(spielerBewegt == false) {
-                //Angriff oder Verteidigung
-                int[] team = new int[4];
-                if (spielernum < 4) {
-                    for (int i = 0; i < 4; i++) {
-                        team[i] = spielerPosX[i];
-                    }
-                } else {
-                    for (int i = 0; i < 4; i++) {
-                        team[i] = spielerPosX[i + 4];
-                    }
-                }
-
-                team = BubbleSort.bubbleSort(team);
-                int teamPos = 0;
-                for (int i = 0; i < 4; i++) {
-                    if (team[i] == spielerPosX[spielernum]) {
-                        teamPos = i;
-                    }
-                }
-
-                bewegeSpielerR(spielernum, teamPos);
             }
             spielfeld[spielerPosX[spielernum]][spielerPosY[spielernum]] = 'P';
         }
@@ -729,6 +705,10 @@ public class Farben {
         }
     }
 
+    /**
+     * Simuliert das Farbenmatch mit n-Schritten
+     * @param anzahlDerSchritte n-Schritte
+     */
     public static void simulation(int anzahlDerSchritte){
         //Vorbereitung:
         initialisiereSpielfeld(80,80);
@@ -740,8 +720,8 @@ public class Farben {
             sv.step(spielfeld);
         }
         //Nachbereitung:
-        System.out.println(auswertung());
-        sv.start();
+        //System.out.println(auswertung());
+        //sv.start();
     }
 
     public static void schrittD(){
@@ -773,7 +753,21 @@ public class Farben {
         }
     }
 
-    public static void main (String [] args){
-        simulation(1000);
+    public static void main (String [] args) {
+        int countOne=0;
+        int countTwo=0;
+        for (int i = 0; i < 100; i++) {
+            simulation(1000);
+            int temp = auswertung();
+            if(temp==1){
+                countOne++;
+            }
+            if(temp==2){
+                countTwo++;
+            }
+        }
+        System.out.println(countOne);
+        System.out.println(countTwo);
+        sv.start();
     }
 }

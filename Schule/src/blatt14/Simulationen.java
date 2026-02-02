@@ -312,7 +312,7 @@ public class Simulationen {
      * @param rand Ob am Ende des Feldes am anderen Ende geschaut werden soll
      * @return Anzahl des Zeichens im Umfeld
      */
-    public static int zaehlenVier(char[][] arr, int y, int x, char zeichen, boolean rand){
+    public static int zaehlenVier(char[][] arr, int x, int y, char zeichen, boolean rand){
         int i = 0;
 
         if(getNorden(arr, x,y,rand)==zeichen){
