@@ -155,7 +155,7 @@ public class Farben {
         for(int i=0; i<reihenfolge.length; i++){
             int pos;
             do{
-                pos = (int)(Math.random()*(reihenfolge.length+1));
+                pos = (int)(Math.random()*(reihenfolge.length));
             } while (reihenfolge[pos] !=-1);
             reihenfolge[pos] = i;
         }
