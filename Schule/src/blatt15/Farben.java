@@ -724,7 +724,7 @@ public class Farben {
         //sv.start();
     }
 
-    public static void schrittD(){
+    public static void schrittTesteAttack(){
         reihenfolge();
         spielerPosX[0]=10;
         spielerPosY[0]=10;
