@@ -9,6 +9,7 @@ public class Steine {
     static int[] elementPos =  new int[2];
     static int clearRowCount = 0;
     static char[][] endFeld = MultiArrays.createEmpty2DCharArray(10,40);
+
     /**
      * Erstellt ein Spielfeld, ohne es im Schisch Visualizer zu initialisieren
      * @param a breite des Spielfeldes
@@ -602,6 +603,9 @@ public class Steine {
         }
     }
 
+    /**
+     * Geht das Spielfeld durch und löscht eine Reihe, falls diese vollständig ist (clear-methode aus Tetris).
+     */
     public static void clearRow(){
         for(int j=0;j<spielfeld[0].length;j++){
             int counter =0;
@@ -625,6 +629,10 @@ public class Steine {
         }
     }
 
+    /**
+     * simuliert Tetris
+     * @param anzahl Anzahl an Elementen, welche gespawnt und bewegt werden
+     */
     public static void simulator(int anzahl){
         for (int i = 0; i < anzahl; i++) {
             int temp = (int)(Math.random()*7);

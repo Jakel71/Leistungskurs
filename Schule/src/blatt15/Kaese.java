@@ -37,6 +37,9 @@ public class Kaese {
         }
     }
 
+    /**
+     * Generiert Wasser und prüft, ob ein Kaese/Objekt wasserdicht ist. 2-Dimensional
+     */
     public static void wasserGen (){
         for (int i = 0; i < kaeseQuerschnitt.length; i++) {
             if (kaeseQuerschnitt[i][0] == '0') {

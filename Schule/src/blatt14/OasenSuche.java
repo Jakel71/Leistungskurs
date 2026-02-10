@@ -73,6 +73,9 @@ public class OasenSuche {
         }
     }
 
+    /**
+     * bewegt den Spieler zufällig auf ein feld links/rechts/oben/unten von ihm
+     */
     public static void bewegeSpielerZufaellig(){
         int richtung = (int)(Math.random()*4);
 
@@ -142,6 +145,10 @@ public class OasenSuche {
 
     }
 
+    /**
+     * Suchalgorithmus, welcher auf Basis von Random ein bestimmtes Feld finden soll, funktioniert mit bewegeSpielerZufaellig
+     * @param energiewert Dieser Wert legt fest, nach welcher Anzahl an Schritten der Spieler aufgeben soll.
+     */
     public static void findeWasser(int energiewert){
         if(spielfeld!=null) {
             if(spielerPosition!=null) {

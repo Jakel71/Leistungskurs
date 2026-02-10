@@ -8,9 +8,9 @@ public class KomplexerKaese {
     static SchischVisualizer sv = new SchischVisualizer();
 
     /**
-     * Überprüfung, ob 2 2D-Char-Arrays identisch sind
-     * @param arr1 char[][]
-     * @param arr2 char[][]
+     * Überprüfung, ob 2 3D-Char-Arrays identisch sind
+     * @param arr1 char[][][]
+     * @param arr2 char[][][]
      * @return true/false
      */
     public static boolean istIdentisch3D (char[][][] arr1, char[][][] arr2){
@@ -46,6 +46,7 @@ public class KomplexerKaese {
             }
         }
     }
+
     /**
      * erzeugt zufaellig Kaese
      * @param wahrscheinlichkeit wahrscheinlichkeit der Kaesegenerierung auf einem Feld
@@ -65,6 +66,9 @@ public class KomplexerKaese {
         }
     }
 
+     /**
+     * Generiert Wasser und prüft, ob ein Kaese/Objekt wasserdicht ist. 3-Dimensional
+     */
     public static void wasserGen (){
         for(int h =0;h<kaese.length;h++) {
             for (int i = 0; i < kaese[h].length; i++) {
