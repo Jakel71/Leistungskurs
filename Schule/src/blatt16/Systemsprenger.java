@@ -95,7 +95,7 @@ public class Systemsprenger {
     public static void main(String[] args) {
         String pfad = "Schule" + File.separator + "src" + File.separator + "blatt16";
         pfad = System.getProperty("user.home")+ File.separator + "Desktop";
-//        sprengen(512,100000, pfad);
+//        sprengen(51,10000, pfad);
         reinigen( pfad); //+ File.separator + "sprengtest");
     }
 }

@@ -1,7 +1,6 @@
 package blatt16;
 
 import java.io.File;
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 public class Schreibprozess {
