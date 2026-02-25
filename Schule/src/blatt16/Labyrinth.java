@@ -63,19 +63,19 @@ public class Labyrinth {
                     newRichtung = 1;
                 }
 
-                if (x>0 && y>0 && laby[x - 1][y] == '1' && laby[x][y - 1]=='5' && laby[x][y - 1]!='1') {
+                if (x>0 && y>0 && laby[x - 1][y] == '1' && (laby[x][y - 1]=='5') && laby[x][y - 1]!='1') {
                     newRichtung = 8;
                 }
 
-                if (y<laby[0].length && x>0 && laby[x][y + 1] == '1' && laby[x - 1][y]=='5' && laby[x - 1][y]!='1') {
+                if (y<laby[0].length && x>0 && laby[x][y + 1] == '1' && (laby[x - 1][y]=='5') && laby[x - 1][y]!='1') {
                     newRichtung = 5;
                 }
 
-                if (x<laby.length && y<laby[0].length && laby[x + 1][y] == '1' && laby[x][y + 1]=='5' && laby[x][y + 1]!='1') {
+                if (x<laby.length && y<laby[0].length && laby[x + 1][y] == '1' && (laby[x][y + 1]=='5') && laby[x][y + 1]!='1') {
                     newRichtung = 6;
                 }
 
-                if (y>0 && x>0 && laby[x][y-1] == '1' && laby[x + 1][y]=='5' && laby[x + 1][y]!='1') {
+                if (y>0 && x<laby.length && laby[x][y-1] == '1' && (laby[x + 1][y]=='5') && laby[x + 1][y]!='1') {
                     newRichtung = 7;
                 }
 
@@ -143,7 +143,7 @@ public class Labyrinth {
     }
 
     public static void main(String[] args){
-        char[][] laby = leseLabyrinth(5);
+        char[][] laby = leseLabyrinth(2);
         sv.step(laby);
         labyrinthSimulation(laby);
         sv.start();
