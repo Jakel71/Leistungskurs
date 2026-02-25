@@ -23,6 +23,11 @@ public class Labyrinth {
         return Stroeme.readCharArray("laby" + numLaby + ".txt", "Schule" + File.separator + "src" + File.separator + "blatt16");
     }
 
+    /**
+     * Simuliert einen Pathfinder, welcher versucht ein Labyrinth zu lösen
+     * @param laby Labyrinth
+     * @return Anzahl der gebrauchten Schritte
+     */
     public static int labyrinthSimulation(char[][] laby){
         if(istMoeglich(laby)) {
             int richtung = 1;
