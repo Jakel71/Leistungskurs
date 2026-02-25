@@ -13,7 +13,7 @@ public class Ackermann {
     }
     public static void main(String args[]){
         long start = System.currentTimeMillis();
-        System.out.println(ackermann(4,1));
+        System.out.println(ackermann(4,2));
         long end = System.currentTimeMillis();
         long dur = end - start;
         System.out.println(dur + " Millisekunde(n)");
