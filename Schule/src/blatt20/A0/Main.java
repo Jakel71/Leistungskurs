@@ -1,6 +1,6 @@
 package blatt20.A0;
 
-public class Instanzen {
+public class Main {
     public static void main(String[] args) {
         Fahrrad fahrrad1 = new Fahrrad();
         fahrrad1.typ = "Rennrad";
@@ -18,5 +18,6 @@ public class Instanzen {
 
         System.out.println("Gaenge vorne: " + fahrrad1.gaengeVorne);
         fahrrad1.klingeln();
+        fahrrad1.beschreiben();
     }
 }

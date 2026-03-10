@@ -1,5 +1,10 @@
 package blatt20.A0;
 
+/**
+ * Repräsentiert ein einfaches Fahrrad aus dem Info-Unterricht
+ * @author Jan
+ * @version 1.0
+ */
 public class Fahrrad {
 
     String typ;
@@ -15,34 +20,58 @@ public class Fahrrad {
     boolean amFahren;
     int currentGangVorne;
     int currentGangHinten;
-    
+
+    /**
+     * beschleunigt auf Zielgeschwindigkeit
+     * @param targetSpeed Zielgeschwindigkeit
+     */
     public void beschleunigen (double targetSpeed){
         currentSpeed = targetSpeed;
     }
+
+    /**
+     * klingelt die klingel
+     */
     public void klingeln(){
         System.out.println("Klingelingeling!");
     }
 
+    /**
+     * bremst auf Zielgeschwindigkeit
+     * @param targetSpeed Zielgeschwindigkeit
+     */
     public void bremsen (double targetSpeed){
-        currentSpeed = targetSpeed;
+        this.currentSpeed = targetSpeed;
     }
 
+    /**
+     * gibt an, ob ein Fahrrad gerade bewegt wird
+     */
     public void fahren (){
-        if(currentSpeed == 0){
-            amFahren = false;
+        if(this.currentSpeed == 0){
+            this.amFahren = false;
+        } else {
+            this.amFahren = true;
         }
-        amFahren = true;
     }
 
+    /**
+     * Schaltet die Gaenge
+     * @param targetGangVorne Zielgang vorne; -1 für bleiben
+     * @param targetGangHinten Zielgang hinten; -1 für bleiben
+     */
     public void schalten(int targetGangVorne, int targetGangHinten){
         if(targetGangVorne!=-1) {
-            currentGangVorne = targetGangVorne;
+            this.currentGangVorne = targetGangVorne;
         }
         if(targetGangHinten!=-1) {
-            currentGangHinten = targetGangHinten;
+            this.currentGangHinten = targetGangHinten;
         }
     }
 
+    /**
+     * kurze beschreibung vom Fahrrad
+     */
     public void beschreiben(){
         System.out.println("Beschreibung: " + this.typ + ", " + this.farben[0] + ", " + this.farben[1] + ", " + this.farben[2] + ", " + this.gaengeVorne+", " + this.gaengeHinten);
     }
