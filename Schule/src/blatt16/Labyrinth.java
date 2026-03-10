@@ -223,7 +223,7 @@ public class Labyrinth {
     }
 
     public static void main(String[] args){
-        char[][] laby = leseLabyrinth(5);
+        char[][] laby = leseLabyrinth(4);
         sv.step(laby);
         System.out.println(labyrinthSimulation(laby));
         sv.start();
