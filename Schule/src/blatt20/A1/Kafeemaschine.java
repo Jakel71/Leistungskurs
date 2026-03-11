@@ -6,6 +6,7 @@ package blatt20.A1;
  * @version 1.0
  */
 public class Kafeemaschine {
+
     double bohnen;
     double wasser;
     double dreck;
@@ -83,12 +84,12 @@ public class Kafeemaschine {
             System.out.println("Zu viel dreck! Versuch es später erneut, nachdem du den Dreck beseitigt hast!");
             return;
         } else if (this.dreck>75) {
-            if (Math.random()>0.5) {
+            if (Math.random()<=0.5) {
                 System.out.println("Zu viel dreck! Versuch es erneut oder entferne den Dreck aus dem Wasser!");
                 return;
             }
         } else if (this.dreck >50) {
-            if(Math.random()>0.25) {
+            if(Math.random()<=0.25) {
                 System.out.println("Zu viel dreck! Versuch es erneut oder entferne den Dreck aus dem Wasser!");
                 return;
             }
@@ -101,6 +102,7 @@ public class Kafeemaschine {
         }
 
         double bohnenMenge = menge/10*(0.5*intensitaet);
+
         if(bohnenMenge > this.bohnen){
             System.out.println("Zu wenig Bohnen! Bitte nachfüllen!");
             return;
