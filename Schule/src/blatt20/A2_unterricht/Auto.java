@@ -7,11 +7,11 @@ package blatt20.A2_unterricht;
  */
 public class Auto {
 
-    String marke;
-    String modell;
-    int tank;
-    int geschwindigkeit;
-    int kilometerstand;
+    private String marke;
+    private String modell;
+    private int tank;
+    private int geschwindigkeit;
+    private int kilometerstand;
 
     /**
      * PARAMETER-KONSTRUKTOR: generiert ein Auto mit den übergebenen Werten
@@ -54,6 +54,99 @@ public class Auto {
         ...
          */
     }
+
+    /**
+     * getter für Marke
+     * @return marke
+     */
+    public String getMarke() {
+        return marke;
+    }
+
+    /**
+     * setter für Marke
+     * @param marke Marke; gültig: jeder String
+     */
+    public void setMarke(String marke) {
+        this.marke = marke;
+    }
+
+    /**
+     * getter für Modell
+     * @return Modell
+     */
+    public String getModell() {
+        return modell;
+    }
+
+    /**
+     * setter für modell
+     * @param modell modell; gültig: jeder String
+     */
+    public void setModell(String modell) {
+        this.modell = modell;
+    }
+
+    /**
+     * getter für Tank
+     * @return Tank in Liter
+     */
+    public int getTank() {
+        return tank;
+    }
+
+    /**
+     * setter für Tank
+     * @param tank Tank; gültig: jeder int >= 0
+     */
+    public void setTank(int tank) {
+        this.tank = tank;
+        if(this.tank<0){
+            this.tank = 0;
+        }
+//        if(this.tank>100){
+//            this.tank = 100;
+//        }
+    }
+
+    /**
+     * getter für Geschwindigkeit
+     * @return Geschwindigkeit in km/h
+     */
+    public int getGeschwindigkeit() {
+        return geschwindigkeit;
+    }
+
+    /**
+     * setter für Geschwindigkeit
+     * @param geschwindigkeit Geschwindigkeit; gültig: jeder int >=0
+     */
+    public void setGeschwindigkeit(int geschwindigkeit) {
+        this.geschwindigkeit = geschwindigkeit;
+        if(this.geschwindigkeit<0){
+            this.geschwindigkeit = 0;
+        }
+    }
+
+    /**
+     * getter für Kilometerstand
+     * @return Kilometerstand in km
+     */
+    public int getKilometerstand() {
+        return kilometerstand;
+    }
+
+    /**
+     * setter für Kilometerstand
+     * @param kilometerstand Kilometerstand; gültig: jeder int >=0;
+     */
+    public void setKilometerstand(int kilometerstand) {
+        this.kilometerstand = kilometerstand;
+        if(this.kilometerstand<0){
+            this.kilometerstand = 0;
+        }
+    }
+
 
 
     /**

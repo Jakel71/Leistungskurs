@@ -12,6 +12,12 @@ public class Ofen {
 
     public void einstellenTemp(double zielTemp){
         this.temperatur = zielTemp;
+        if(this.temperatur>250){
+            this.temperatur=250;
+        }
+        if(this.temperatur<0){
+            this.temperatur=0;
+        }
     }
 
     public void modiWechselen(boolean up){

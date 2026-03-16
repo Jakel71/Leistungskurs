@@ -4,8 +4,8 @@ public class Kochfeld {
     int hitzestufe;
     String groesse;
 
-    public Kochfeld(int hitzestufe, String groesse) {
-        this.hitzestufe = hitzestufe;
+    public Kochfeld(String groesse) {
+        this.hitzestufe = 0;
         this.groesse = groesse;
     }
 
@@ -18,4 +18,6 @@ public class Kochfeld {
             this.hitzestufe -= 1;
         }
     }
+
+
 }
