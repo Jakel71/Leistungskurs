@@ -2,25 +2,43 @@ package blatt20.A4_unterricht;
 
 public class Smartphone {
     private String marke;
-    private String Modell;
+    private String modell;
     private int akkustand;
     private double speicherplatz; // max Speicher (ROM)
     private double preis;
+    private double displayGroesse;
+    private int helligkeit; // in Prozent
+    private int lautstaerke; // in Prozent
+    private String betriebssystem;
+    private boolean eingeschaltet;
+    private double maxSpeicher;
 
     /**
      * parameter-Konstruktor:
      * @param marke Marke des Gerätes
-     * @param Modell  Modell des Gerätes
+     * @param modell  Modell des Gerätes
      * @param akkustand Akkustand des Gerätes
      * @param speicherplatz ROM des Gerätes
      * @param preis Preis des Gerätes
+     * @param displayGroesse Displaygroesse in Zoll
+     * @param helligkeit von 0-100%
+     * @param lautstaerke von 0-100%
+     * @param betriebssystem Betriebssystem, meistens Android / IOS
+     * @param eingeschaltet true/false, ob Geraet an
+     * @param maxSpeicher maximaler Speicher eines Geraetes
      */
-    public Smartphone(String marke, String Modell, int akkustand, double speicherplatz, double preis) {
+    public Smartphone(String marke, String modell, int akkustand, double speicherplatz, double preis, double displayGroesse, int helligkeit, int lautstaerke, String betriebssystem, boolean eingeschaltet, double maxSpeicher) {
         this.marke = marke;
-        this.Modell = Modell;
+        this.modell = modell;
         this.akkustand = akkustand;
         this.speicherplatz = speicherplatz;
         this.preis = preis;
+        this.displayGroesse = displayGroesse;
+        this.helligkeit = helligkeit;
+        this.lautstaerke = lautstaerke;
+        this.betriebssystem = betriebssystem;
+        this.eingeschaltet = eingeschaltet;
+        this.maxSpeicher = maxSpeicher;
     }
 
     /**
@@ -36,7 +54,7 @@ public class Smartphone {
      * @return modell
      */
     public String getModell() {
-        return Modell;
+        return modell;
     }
 
     /**
@@ -64,16 +82,197 @@ public class Smartphone {
     }
 
     /**
+     * getter
+     * @return Display Groesse in Zoll
+     */
+    public double getDisplayGroesse() {
+        return displayGroesse;
+    }
+
+    /**
+     * getter
+     * @return Helligkeit in %
+     */
+    public int getHelligkeit() {
+        return helligkeit;
+    }
+
+    /**
+     * getter
+     * @return Laustsärke in %
+     */
+    public int getLautstaerke() {
+        return lautstaerke;
+    }
+
+    /**
+     * getter
+     * @return Betriebssystem
+     */
+    public String getBetriebssystem() {
+        return betriebssystem;
+    }
+
+    /**
+     * getter
+     * @return Eingeschaltet
+     */
+    public boolean getEingeschaltet() {
+        return eingeschaltet;
+    }
+
+    /**
+     * getter
+     * @return Maximaler Speicher eines Gerätes
+     */
+    public double getMaxSpeicher() {
+        return maxSpeicher;
+    }
+
+    /**
      * setter
-     * @param akkustand neuer Akkustand; gültig: alles zwischen 1 und 100
+     * @param akkustand
      */
     public void setAkkustand(int akkustand) {
         this.akkustand = akkustand;
-        if(akkustand <0){
+        if(this.akkustand <0){
             this.akkustand = 0;
         }
-        if(akkustand > 100){
+        if(this.akkustand > 100){
             this.akkustand = 100;
         }
+    }
+
+    /**
+     * setter
+     * @param preis
+     */
+    public void setPreis(double preis) {
+        this.preis = preis;
+    }
+
+    /**
+     * setter
+     * @param helligkeit
+     */
+    public void setHelligkeit(int helligkeit) {
+        this.helligkeit = helligkeit;
+        if(helligkeit < 0){
+            this.helligkeit = 0;
+        }
+        if(helligkeit > 100){
+            this.helligkeit = 100;
+        }
+    }
+
+    /**
+     * setter
+     * @param lautstaerke
+     */
+    public void setLautstaerke(int lautstaerke) {
+        this.lautstaerke = lautstaerke;
+        if(lautstaerke < 0){
+            this.lautstaerke = 0;
+        }
+        if(lautstaerke > 100){
+            this.lautstaerke = 100;
+        }
+    }
+
+    /**
+     * setter
+     * @param betriebssystem
+     */
+    public void setBetriebssystem(String betriebssystem) {
+        this.betriebssystem = betriebssystem;
+    }
+
+    /**
+     * setter
+     * @param eingeschaltet
+     */
+    public void setEingeschaltet(boolean eingeschaltet) {
+        this.eingeschaltet = eingeschaltet;
+    }
+
+    /**
+     * setter
+     * @param speicherplatz
+     */
+    public void setSpeicherplatz(double speicherplatz) {
+        this.speicherplatz = speicherplatz;
+        if(speicherplatz < 0){
+            this.speicherplatz = 0;
+        }
+        if(this.maxSpeicher<this.speicherplatz){
+            this.speicherplatz = this.maxSpeicher;
+        }
+    }
+
+
+
+    /**
+     * löscht den gesamten Speicher!
+     */
+    public void speicherLeeren(){
+        this.speicherplatz = 0;
+        this.betriebssystem = null;
+    }
+
+    /**
+     * setter (lädt den Akku)
+     * @param zielStand zielwert
+     */
+    public void akkuLaden(int zielStand){
+        this.akkustand = zielStand;
+        if(zielStand <0){
+            this.akkustand = 0;
+        }
+        if(zielStand > 100){
+            this.akkustand = 100;
+        }
+    }
+
+    /**
+     * schaltet das geraet ein
+     */
+    public void einschalten(){
+        if(!this.eingeschaltet){
+            this.eingeschaltet = true;
+        }
+    }
+
+    /**
+     * akku Leer?
+     * @return true/false
+     */
+    public boolean istAkkuLeer(){
+        if(this.akkustand == 0){
+            this.eingeschaltet = false;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * installiert App
+     * @param benoetigterSpeicher Speicher der App, wenn kleiner als max speicher, dann passiert nichts
+     */
+    public void appInstallieren(double benoetigterSpeicher){
+        if(hatGenugSpeicher(benoetigterSpeicher)){
+            this.speicherplatz += benoetigterSpeicher;
+        }
+    }
+
+    /**
+     * test, ob genug speicher vorhanden ist
+     * @param speicher benoetigter Speicher
+     * @return true/false
+     */
+    public boolean hatGenugSpeicher(double speicher){
+        if(this.maxSpeicher-this.speicherplatz>speicher){
+            return true;
+        }
+        return false;
     }
 }
