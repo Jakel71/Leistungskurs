@@ -1,5 +1,12 @@
 package blatt20.A4_unterricht;
 
+import java.util.Objects;
+
+/**
+ * Generiert eine Smartphone-Klasse
+ * @author Jan
+ * @version 1.0
+ */
 public class Smartphone {
     private String marke;
     private String modell;
@@ -275,4 +282,28 @@ public class Smartphone {
         }
         return false;
     }
+
+    /**
+     * eigene equals funktion, überschreibt den "normalen" equals, mit eigenen Attributen, welche verglichen werden
+     * @param o   the reference object with which to compare.
+     * @return true/false
+     */
+    @Override
+    public boolean equals(Object o) {
+        //1. Referenzvergleich
+        if(this == o){
+            return true;
+        }
+
+        //2. Typprüfung
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        //3. Cast
+        Smartphone that = (Smartphone) o;
+
+        //4.Attributprüfung
+        return Double.compare(speicherplatz, that.speicherplatz) == 0 && Double.compare(preis, that.preis) == 0 && Double.compare(displayGroesse, that.displayGroesse) == 0 && Double.compare(maxSpeicher, that.maxSpeicher) == 0 && Objects.equals(marke, that.marke) && Objects.equals(modell, that.modell) && Objects.equals(betriebssystem, that.betriebssystem);
+    }
+
 }

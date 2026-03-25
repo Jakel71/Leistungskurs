@@ -2,6 +2,11 @@ package blatt20.A5_unterricht;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Generiert eine benutzerkonto-Klasse
+ * @author Jan
+ * @version 1.0
+ */
 public class Benutzerkonto {
     private String benutzername;
     private String eMail;
@@ -29,12 +34,12 @@ public class Benutzerkonto {
 
     /**
      * returned if login data is correct
-     * @param benutzername usename
+     * @param name username || eMail
      * @param passwort password
      * @return ture/false
      */
-    public boolean login(String benutzername, String passwort){
-        if(this.benutzername == benutzername && this.passwort == passwort){
+    public boolean login(String name, String passwort) {
+        if ((this.benutzername.equals(name) || this.eMail.equals(name)) && this.passwort.equals(passwort)) {
             return true;
         }
         return false;
@@ -45,8 +50,8 @@ public class Benutzerkonto {
      * @param passwortALT altes Passwort
      * @param passwort neues Passwort
      */
-    public void setPasswort(String passwortALT, String passwort){
-        if(this.passwort == passwortALT){
+    public void setPasswort(String passwortALT, String passwort, String passwortWieder) {
+        if(this.passwort.equals(passwortALT) && passwortWieder.equals(passwort)) {
             this.passwort = passwort;
         }
     }
@@ -55,11 +60,21 @@ public class Benutzerkonto {
      * fügt Guthaben aus einem Code hinzu
      * @param code Code
      */
-    public void setGuthaben(String code){
+    public void setGuthaben(String code) {
         for (int i = 0; i < this.codes.length; i++) {
-            if(this.codes[i][0].equals(code)){
+            if(this.codes[i][0].equals(code)) {
                 this.guthaben += Integer.parseInt( codes[i][1]);
             }
+        }
+    }
+
+    /**
+     * Setter, welcher nur verringern darf
+     * @param guthaben neuer Wert
+     */
+    public void verringerGuthaben(double guthaben) {
+        if(this.guthaben > guthaben) {
+            this.guthaben = guthaben;
         }
     }
 
@@ -67,7 +82,7 @@ public class Benutzerkonto {
      * getter
      * @return guthaben
      */
-    public double getGuthaben(){
+    public double getGuthaben() {
         return this.guthaben;
     }
 
@@ -79,15 +94,6 @@ public class Benutzerkonto {
         return erstellDatum;
     }
 
-    /**
-     * Setter, welcher nur verringern darf
-     * @param guthaben neuer Wert
-     */
-    public void setGuthaben(double guthaben) {
-        if(this.guthaben > guthaben) {
-            this.guthaben = guthaben;
-        }
-    }
 
     /**
      * getter
