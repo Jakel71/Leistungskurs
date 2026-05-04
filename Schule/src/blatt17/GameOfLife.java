@@ -101,6 +101,17 @@ public class GameOfLife {
                 feld[feld.length/2+4][feld[0].length/2+3] = '9';
                 feld[feld.length/2+3][feld[0].length/2+4] = '9';
                 break;
+            case 7:
+
+                feld[feld.length/2-4][feld[0].length/2] = '9';
+                feld[feld.length/2-4][feld[0].length/2+1] = '9';
+                feld[feld.length/2-5][feld[0].length/2+1] = '9';
+                feld[feld.length/2-4][feld[0].length/2+2] = '9';
+                feld[feld.length/2-5][feld[0].length/2+2] = '9';
+                feld[feld.length/2-6][feld[0].length/2+2] = '9';
+                feld[feld.length/2-4][feld[0].length/2+3] = '9';
+                feld[feld.length/2-5][feld[0].length/2+3] = '9';
+                feld[feld.length/2-4][feld[0].length/2+4] = '9';
         }
     }
 
@@ -108,7 +119,7 @@ public class GameOfLife {
         SchischVisualizer sv = new SchischVisualizer();
         char[][] feld = new char[100][100];
         initRandom(feld,0);
-        initOszilierend(6,feld);
+        initOszilierend(7,feld);
         for (int i = 0; i < 200; i++) {
             sv.step(feld);
             weiter(feld);
