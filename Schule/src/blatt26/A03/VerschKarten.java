@@ -1,6 +1,9 @@
 package blatt26.A03;
 
-public enum VerschKarten implements Comparable<VerschKarten>{
+/**
+ * Enum um die verschiedenen Karten darzustellen
+ */
+public enum VerschKarten {
     Stein,
     Schere,
     Papier;
