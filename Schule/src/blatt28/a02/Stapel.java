@@ -57,6 +57,48 @@ public class Stapel <T> {
         this.push(temp);
     }
 
+    /**
+     * Tauscht die zwei obersten Elemente
+     */
+    public void swap() {
+        T tempUpper = this.pop();
+        T tempLower = this.pop();
+        this.push(tempUpper);
+        this.push(tempLower);
+    }
+
+    /**
+     * Rotiert die obersten n Elemente nach links im Kreis
+     * @param anzahlElemente n Elemente
+     */
+    public void rotateLeft(int anzahlElemente){
+        Stapel<T> stapel2 = new Stapel<T>();
+        for(int i=0; i<anzahlElemente-1; i++){
+            stapel2.push(this.pop());
+        }
+        T temp = this.pop();
+        for(int i=0; i<anzahlElemente-1; i++){
+            this.push(stapel2.pop());
+        }
+        this.push(temp);
+    }
+
+    /**
+     * Rotiert die obersten n Elemente nach rechts im Kreis
+     * @param anzahlElemente n Elemente
+     */
+    public void rotateRight(int anzahlElemente){
+        T temp = this.pop();
+        Stapel<T> stapel2 = new Stapel<T>();
+        for(int i=0; i<anzahlElemente-1; i++){
+            stapel2.push(this.pop());
+        }
+        this.push(temp);
+        for(int i=0; i<anzahlElemente-1; i++){
+            this.push(stapel2.pop());
+        }
+    }
+
     @Override
     public String toString() {
         return "Stapel{" +
