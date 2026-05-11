@@ -2,6 +2,9 @@ package blatt26.A04;
 
 import java.io.File;
 
+/**
+ * main Klasse von blatt26.A04
+ */
 public class Main {
     public static void main(String[] args) {
         Schachbrett schachbrett = new Schachbrett();
