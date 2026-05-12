@@ -1,29 +1,32 @@
-package blatt29.A02;
+package blatt29.A03;
 
 /**
- * Klasse zur Darstellung einer LinkedList
+ * Klasse für eine DoubleLinkList
  * @version 1.0
  */
-public class LinkList<T> {
+public class DoubleLinkList<T> {
     Node<T> head;
+    Node<T> tail;
 
     /**
      * Param-Konstruktor
-     * @param head Head (First Node)
+     * @param head Erster Node
+     * @param tail Letzter Node
      */
-    public LinkList(Node<T> head) {
+    public DoubleLinkList(Node<T> head, Node<T> tail) {
         this.head = head;
+        this.tail = tail;
     }
 
     /**
      * Default-Konstruktor
      */
-    public LinkList() {
+    public DoubleLinkList(){
     }
 
     /**
-     * Längenbestimmung der LinkedList
-     * @return int, Länge der Liste
+     * Bestimmt die Länge der Liste
+     * @return int
      */
     public int size() {
         int size = 0;
@@ -53,27 +56,19 @@ public class LinkList<T> {
             throw new IndexOutOfBoundsException();
         }
 
-        Node<T> current = this.head;
-        for (int i = 0; i < index; i++) {
-            current = current.next();
-        }
-        return current.value;
-    }
-
-    /**
-     * Überprüft, ob der Wert v in der Liste ist
-     * @param value v
-     * @return true/false
-     */
-    public boolean contains(T value) {
-        Node<T> current = this.head;
-        while (current != null) {
-            if (current.value == value) {
-                return true;
+        if(index-size()/2>=0) {
+            Node<T> current = this.tail;
+            for (int i = this.size()-1; i > index-1; i--) {
+                current = current.prev();
             }
-            current = current.next();
+            return current.value;
+        }else{
+            Node<T> current = this.head;
+            for (int i = 0; i < index-1; i++) {
+                current = current.next();
+            }
+            return current.value;
         }
-        return false;
     }
 
     /**
@@ -84,13 +79,13 @@ public class LinkList<T> {
         Node<T> newNode = new Node<>(value);
         if(isEmpty()){
             this.head = newNode;
+            this.tail = newNode;
             return;
         }
-        Node<T> current = this.head;
-        while (current.next != null) {
-            current = current.next();
-        }
+        Node<T> current = this.tail;
+        newNode.prev = current;
         current.next = newNode;
+        this.tail = newNode;
     }
 
     /**
@@ -108,12 +103,23 @@ public class LinkList<T> {
             this.head = newNode;
             return;
         }
-        Node<T> current = this.head;
-        for (int i = 0; i < index-1; i++) {
-            current = current.next();
+        Node<T> current;
+        if(index-size()/2>=0){
+            current = this.tail;
+            for (int i = this.size()-1; i > index-1; i--) {
+                current = current.prev();
+            }
+        }else {
+            current = this.head;
+            for (int i = 0; i < index - 1; i++) {
+                current = current.next();
+            }
         }
+        newNode.prev = current.prev;
         newNode.next = current.next;
+
         current.next = newNode;
+        current.prev = newNode;
     }
 
     /**
