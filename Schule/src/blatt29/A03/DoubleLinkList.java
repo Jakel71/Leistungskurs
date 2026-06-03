@@ -164,6 +164,6 @@ public class DoubleLinkList<T> {
     }
 
     /*
-    c) Bei dem Hinzufügen, bearbeiten und Löschen von Daten, sind wir effizienter, da wir von 2 Seiten aus darauf zugreifen können und deswegen den kürzeren Weg automatisch ausnuten können. O(n) zu O(n/2), obwohl sich dies zu O(n) vereinfacht, in einem direkten Vergleich gewinnt jedoch die neuere Variante
+    c) Bei dem Hinzufügen, bearbeiten und Löschen von Daten, sind wir effizienter, da wir von 2 Seiten aus darauf zugreifen können und deswegen den kürzeren Weg automatisch ausnutzen können. O(n) zu O(n/2), obwohl sich dies zu O(n) vereinfacht, in einem direkten Vergleich gewinnt jedoch die neuere Variante
      */
 }

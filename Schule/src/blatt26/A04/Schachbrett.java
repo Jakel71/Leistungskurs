@@ -7,8 +7,8 @@ import java.util.Arrays;
  * Klasse, um ein Schachbrett darzustellen
  */
 public class Schachbrett implements Serializable {
-    private Figuren[][] brett = new Figuren[8][8];
     private static final long serialVersionUID = 1L;
+    private Figuren[][] brett = new Figuren[8][8];
 
     /**
      * Default Konstruktor
