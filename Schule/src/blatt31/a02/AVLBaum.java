@@ -1,13 +1,11 @@
-package blatt30.a02;
+package blatt31.a02;
 
-import java.util.ArrayList;
-
-public class BinBaum {
+public class AVLBaum {
     private Node root;
 
-    public BinBaum() {}
+    public AVLBaum() {}
 
-    public BinBaum(Node root) {
+    public AVLBaum(Node root) {
         this.root = root;
     }
 
@@ -32,16 +30,20 @@ public class BinBaum {
             if(current.getValue()<value){
                 if(current.getRight() == null){
                     current.setRight(new Node(value));
-                    return;
+                    break;
                 }
                 current = current.getRight();
             }else{
                 if(current.getLeft() == null){
                     current.setLeft(new Node(value));
-                    return;
+                    break;
                 }
                 current = current.getLeft();
             }
+        }
+        while(current!=this.root){
+            current.update();
+            current = this.getParent(current);
         }
     }
 
@@ -79,6 +81,7 @@ public class BinBaum {
                 neighbours[0].setLeft(toDelete.getLeft());
                 this.root = neighbours[0];
             }
+            return toDelete;
         }else if(toDelete.getRight() == null && toDelete.getLeft() == null){
             if(parent.getLeft()==toDelete){
                 parent.setLeft(null);
@@ -120,6 +123,12 @@ public class BinBaum {
                     }
                 }
             }
+
+        Node current = parent;
+        while(current!=this.root){
+            current.update();
+            current = this.getParent(current);
+        }
         return toDelete;
     }
 
@@ -148,6 +157,34 @@ public class BinBaum {
     public void preOrder(){
         System.out.println("Pre Order:");
         preOrderSout(this.root);
+    }
+
+    private void rotateLeft(Node current){
+    	Node newRoot = current.getRight();
+    	current.setRight(newRoot.getLeft());
+    	newRoot.setLeft(current);
+    	Node parent = this.getParent(current);
+    	if(parent == null){
+    		this.root = newRoot;
+    	} else if(parent.getLeft() == current){
+    		parent.setLeft(newRoot);
+    	} else{
+    		parent.setRight(newRoot);
+    	}
+    }
+
+    private void rotateRight(Node current){
+        Node newRoot = current.getLeft();
+        current.setLeft(newRoot.getRight());
+        newRoot.setRight(current);
+        Node parent = this.getParent(current);
+        if(parent == null){
+            this.root = newRoot;
+        } else if(parent.getLeft() == current){
+            parent.setLeft(newRoot);
+        } else{
+            parent.setRight(newRoot);
+        }
     }
 
     private void preOrderSout(Node current){

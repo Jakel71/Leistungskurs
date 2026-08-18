@@ -5,6 +5,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="schisch_visualizer_neo" level="project" />
+    <orderEntry type="library" name="schisch_visualizers" level="project" />
   </component>
 </module>

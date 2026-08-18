@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="schisch_visualizers">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libary/schgraphs.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libary/schisch_visualizer_neo.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

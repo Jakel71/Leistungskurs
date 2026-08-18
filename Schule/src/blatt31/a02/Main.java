@@ -1,8 +1,10 @@
-package blatt30.a02;
+package blatt31.a02;
+
+import blatt32.a03.Graph;
 
 public class Main {
     public static void main(String[] args) {
-        BinBaum baum = new BinBaum(new Node(8));
+        AVLBaum baum = new AVLBaum(new Node(8));
         baum.add(6);
         baum.add(7);
         baum.add(-10);
