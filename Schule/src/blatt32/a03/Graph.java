@@ -91,7 +91,7 @@ public class Graph {
         ArrayList<Integer> neighbours = new ArrayList<>();
         for(int i = 0; i < this.adjMatrix.length; i++){
             if(this.adjMatrix[from][i] > 0){
-                neighbours.add(this.adjMatrix[from][i]);
+                neighbours.add(i);
             }
         }
         int[] newNeighbours = new int[neighbours.size()];
