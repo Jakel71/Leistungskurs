@@ -8,8 +8,8 @@ import schisch_visualizer.SchischVisualizer;
 
 import java.util.Arrays;
 
-public class GraphSuche {
-    public int[] AlphabeticalToIntegers(Graph graph,String path) {
+public class  GraphSuche {
+    public static int[] AlphabeticalToIntegers(Graph graph,String path) {
         char[] chars = path.toCharArray();
         int[] pathArray = new int[chars.length];
         for (int i = 0; i < chars.length; i++) {
@@ -18,12 +18,12 @@ public class GraphSuche {
         return pathArray;
     }
 
-    public boolean isPath(Graph graph, String path) {
+    public static boolean isPath(Graph graph, String path) {
         int[] pathArray = AlphabeticalToIntegers(graph, path);
         return isPath(graph, pathArray);
     }
 
-    public boolean isPath(Graph graph, int[] path) {
+    public static boolean isPath(Graph graph, int[] path) {
         for (int i = 0; i < path.length-1; i++) {
             boolean found = false;
             for (int neighbour: graph.getNeighbours(path[i])) {
@@ -38,12 +38,12 @@ public class GraphSuche {
         return true;
     }
 
-    public int pathLength(Graph graph, String path) {
+    public static int pathLength(Graph graph, String path) {
         int[] pathArray = AlphabeticalToIntegers(graph, path);
         return pathLength(graph, pathArray);
     }
 
-    public int pathLength(Graph graph, int[] path) {
+    public static int pathLength(Graph graph, int[] path) {
         int length = 0;
         for (int i = 0; i < path.length-1; i++) {
             for (int neighbour: graph.getNeighbours(path[i])) {
@@ -55,26 +55,34 @@ public class GraphSuche {
         return length;
     }
 
-    public boolean zyklensuche(Graph graph, char startKnoten) {
+    public static boolean zyklensuche(Graph graph, char startKnoten) {
         int startKnotenInt = startKnoten - 'a';
         return zyklensuche(graph, startKnotenInt);
     }
 
-    public boolean zyklensuche(Graph graph, int startKnoten) {
+    public static boolean zyklensuche(Graph graph, int startKnoten) {
         int[][] adjMatrix = graph.getAdjMatrix();
         boolean[] visited = new boolean[adjMatrix.length];
         Stapel<Integer> stack = new Stapel<Integer>();
         stack.push(startKnoten);
         boolean zyklus = false;
+        visited[startKnoten] = true;
+
+        int lastKnoten[] = new int[adjMatrix.length];
+        Arrays.fill(lastKnoten, -1);
+
         while (stack.peek()!=null) {
-            int currentKnoten = (int) stack.pop();
+            int currentKnoten = stack.pop();
             int[]neighbours = graph.getNeighbours(currentKnoten);
             for (int neighbour: neighbours) {
                 if (!visited[neighbour]) {
                     visited[neighbour] = true;
+                    lastKnoten[neighbour] = currentKnoten;
                     stack.push(neighbour);
                 } else {
-                    zyklus = true;
+                    if(neighbour!=lastKnoten[currentKnoten]) {
+                        zyklus = true;
+                    }
                 }
             }
             System.out.println("visited: " + Arrays.toString(visited));
@@ -83,48 +91,53 @@ public class GraphSuche {
         return zyklus;
     }
 
-    public boolean zyklensuche(Graph graph, char startKnoten, SchGraphs sg) {
+    public static boolean zyklensuche(Graph graph, char startKnoten, SchGraphs sg) {
         int startKnotenInt = startKnoten - 'a';
         return zyklensuche(graph, startKnotenInt, sg);
     }
 
-    public boolean zyklensuche(Graph graph, int startKnoten, SchGraphs sg) {
+    public static boolean zyklensuche(Graph graph, int startKnoten, SchGraphs sg) {
         int[][] adjMatrix = graph.getAdjMatrix();
         boolean[] visited = new boolean[adjMatrix.length];
         Stapel<Integer> stack = new Stapel<Integer>();
         stack.push(startKnoten);
         boolean zyklus = false;
-        sg.step(adjMatrix);
+        visited[startKnoten] = true;
+
+        int lastKnoten[] = new int[adjMatrix.length];
+        Arrays.fill(lastKnoten, -1);
 
         while (stack.peek()!=null) {
-            int currentKnoten = (int) stack.pop();
+            int currentKnoten = stack.pop();
             int[]neighbours = graph.getNeighbours(currentKnoten);
             for (int neighbour: neighbours) {
                 if (!visited[neighbour]) {
                     visited[neighbour] = true;
+                    lastKnoten[neighbour] = currentKnoten;
+                    sg.colorEdge(currentKnoten, neighbour, 'g',false);
                     stack.push(neighbour);
                 } else {
-                    zyklus = true;
-                    sg.colorEdge(currentKnoten,neighbour,'r',false);
-                    sg.step();
+                    if(neighbour!=lastKnoten[currentKnoten]) {
+                        zyklus = true;
+                        sg.colorEdge(currentKnoten, neighbour, 'r', false);
+                    }
                 }
             }
             System.out.println("visited: " + Arrays.toString(visited));
             System.out.println("stack: " + stack);
+            System.out.println("lastKnoten: " + Arrays.toString(lastKnoten));
             sg.colorNode(currentKnoten, 'g');
-            int nextKnoten = stack.peek();
-            sg.colorEdge(currentKnoten, nextKnoten, 'g',false);
             sg.step();
         }
         return zyklus;
     }
 
-    public boolean[] erreichbarkeit(Graph graph, char startKnoten, SchGraphs sg) {
+    public static boolean[] erreichbarkeit(Graph graph, char startKnoten, SchGraphs sg) {
         int startKnotenInt = startKnoten - 'a';
         return erreichbarkeit(graph, startKnotenInt, sg);
     }
 
-    public boolean[] erreichbarkeit(Graph graph, int startKnoten,  SchGraphs sg) {
+    public static boolean[] erreichbarkeit(Graph graph, int startKnoten,  SchGraphs sg) {
         int[][] adjMatrix = graph.getAdjMatrix();
         boolean[] visited = new boolean[adjMatrix.length];
         Warteschlange<Integer> queue = new Warteschlange<>();
@@ -154,12 +167,12 @@ public class GraphSuche {
         return visited;
     }
 
-    public boolean erreichbarkeitAbsolute(Graph graph, char startKnoten, SchGraphs sg) {
+    public static boolean erreichbarkeitAbsolute(Graph graph, char startKnoten, SchGraphs sg) {
         int startKnotenInt = startKnoten - 'a';
         return erreichbarkeitAbsolute(graph, startKnotenInt, sg);
     }
 
-    public boolean erreichbarkeitAbsolute(Graph graph, int startKnoten, SchGraphs sg) {
+    public static boolean erreichbarkeitAbsolute(Graph graph, int startKnoten, SchGraphs sg) {
         int[][] adjMatrix = graph.getAdjMatrix();
         boolean[] visited = new boolean[adjMatrix.length];
         Warteschlange<Integer> queue = new Warteschlange<>();
@@ -192,12 +205,12 @@ public class GraphSuche {
         return !unerreichbarkeit;
     }
 
-    public boolean[] erreichbarkeit(Graph graph, char startKnoten) {
+    public static boolean[] erreichbarkeit(Graph graph, char startKnoten) {
         int startKnotenInt = startKnoten - 'a';
         return erreichbarkeit(graph, startKnotenInt);
     }
 
-    public boolean[] erreichbarkeit(Graph graph, int startKnoten) {
+    public static boolean[] erreichbarkeit(Graph graph, int startKnoten) {
         int[][] adjMatrix = graph.getAdjMatrix();
         boolean[] visited = new boolean[adjMatrix.length];
         Warteschlange<Integer> queue = new Warteschlange<>();
@@ -218,12 +231,12 @@ public class GraphSuche {
         return visited;
     }
 
-    public boolean erreichbarkeitAbsolute(Graph graph, char startKnoten) {
+    public static boolean erreichbarkeitAbsolute(Graph graph, char startKnoten) {
         int startKnotenInt = startKnoten - 'a';
         return erreichbarkeitAbsolute(graph, startKnotenInt);
     }
 
-    public boolean erreichbarkeitAbsolute(Graph graph, int startKnoten) {
+    public static boolean erreichbarkeitAbsolute(Graph graph, int startKnoten) {
         int[][] adjMatrix = graph.getAdjMatrix();
         boolean[] visited = new boolean[adjMatrix.length];
         Warteschlange<Integer> queue = new Warteschlange<>();

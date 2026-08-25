@@ -29,7 +29,10 @@ public class Stapel <T> {
      * @return typ des Stacks (Element)
      */
     public T peek() {
-        return liste.getLast();
+        if(!emtpy()) {
+            return liste.get(liste.size() - 1);
+        }
+        return null;
     }
 
     /**

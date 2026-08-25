@@ -29,6 +29,7 @@ public class Warteschlange <T> {
      * @return Element a
      */
     public T peek() {
+        if(this.empty()) return null;
         return this.liste.getFirst();
     }
 

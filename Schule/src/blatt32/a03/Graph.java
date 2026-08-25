@@ -189,7 +189,10 @@ public class Graph {
                 line = br.readLine();
                 graph.addEdge(x,y,Integer.parseInt(line),true);
                 x++;
-                y++;
+                if(x >= graph.size()){
+                    x = 0;
+                    y++;
+                }
             }
         } catch (IOException e){
             throw new RuntimeException(e.getMessage(), e);
