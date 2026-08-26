@@ -1,5 +1,7 @@
 package blatt19;
 
+import java.lang.reflect.Array;
+
 public class QuickSortGeneral<T extends Comparable<T>> {
 
     public static <T extends Comparable<T>> T[] trennenLinks(int pos, T[] arr){
@@ -9,7 +11,8 @@ public class QuickSortGeneral<T extends Comparable<T>> {
                 count++;
             }
         }
-        T[] fin = (T[]) new Comparable[count];
+        @SuppressWarnings("unchecked")
+        T[] fin = (T[]) Array.newInstance(arr.getClass().getComponentType(), count);
         count=0;
         for (int i = 0; i < arr.length; i++) {
             if(arr[i].compareTo(arr[pos])<0){
@@ -27,7 +30,8 @@ public class QuickSortGeneral<T extends Comparable<T>> {
                 count++;
             }
         }
-        T[] fin = (T[]) new Comparable[count];
+        @SuppressWarnings("unchecked")
+        T[] fin = (T[]) Array.newInstance(arr.getClass().getComponentType(), count);
         count=0;
         for (int i = 0; i < arr.length; i++) {
             if(arr[i].compareTo(arr[pos]) >=0 && i!=pos){
@@ -39,7 +43,8 @@ public class QuickSortGeneral<T extends Comparable<T>> {
     }
 
     public static <T extends Comparable<T>> T[] zusammenfuegen(T pivotElement, T[] arrL, T[] arrR){
-        T[] fin = (T[]) new Comparable[arrL.length+arrR.length+1];
+        @SuppressWarnings("unchecked")
+        T[] fin = (T[]) Array.newInstance(arrL.getClass().getComponentType(), arrL.length+arrR.length+1);
         for(int i = 0; i < arrL.length; i++){
             fin[i]=arrL[i];
         }
