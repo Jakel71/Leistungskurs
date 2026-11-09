@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class MST {
 
-    private static boolean allvisited(boolean[] list){
+    public static boolean allvisited(boolean[] list){
         for (boolean bool : list) {
             if(!bool) return false;
         }
