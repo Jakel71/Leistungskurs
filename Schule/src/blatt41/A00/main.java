@@ -1,4 +1,4 @@
-package blatt41.A01;
+package blatt41.A00;
 
 public class main {
     public static void main(String[] args) {

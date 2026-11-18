@@ -1,4 +1,4 @@
-package blatt41.A01;
+package blatt41.A00;
 
 public enum zustaende {
     INIT,

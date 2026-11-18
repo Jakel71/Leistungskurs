@@ -1,4 +1,4 @@
-package blatt41.A01;
+package blatt41.A00;
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
